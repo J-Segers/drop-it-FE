@@ -1,0 +1,6 @@
+.visualizer {
+    width: auto;
+    height: auto;
+    grid-area: visualizer;
+    background: var(--player-visualizer);
+}

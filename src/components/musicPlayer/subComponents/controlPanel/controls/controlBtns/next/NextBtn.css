@@ -1,0 +1,25 @@
+.next-container {
+    width: 50px;
+    height: 50px;
+    transform: scale(50%);
+}
+
+.next-btn {
+    width: 15px;
+    height: 40px;
+    background: var(--button-color);
+    position: fixed;
+    margin: 5px 5px 5px 30px;
+}
+
+.next-btn::before {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid var(--button-color);
+    content: "";
+    position: absolute;
+    right: 0;
+}

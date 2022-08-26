@@ -1,8 +1,11 @@
 :root {
+  --header-height: 70px;
+  --footer-height: 50px;
   --main-color: midnightblue;
   --button-color: cornflowerblue;
   --up-vote-color : lawngreen;
   --down-vote-color: red;
+  --displayColor: #222;
   --player-visualizer: #222222;
 }
 

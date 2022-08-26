@@ -1,0 +1,48 @@
+#large-player {
+    width: 800px;
+    height: 350px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-areas:
+            "visualizer playlist"
+            "visualizer playlist"
+            "visualizer playlist"
+            "visualizer playlist"
+            "control-panel control-panel"
+;
+    color: var(--button-color);
+}
+
+#compact-player, #compact-player > #control-panel {
+    width: 800px;
+    height: 70px;
+    color: var(--button-color);
+}
+
+#Compact-player {
+    margin: 0 calc((100vw - 800px) / 2);
+}
+
+.player-buttons {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.timestamp {
+
+}
+
+.likes {
+    width: 85px;
+    height: 40px;
+    margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

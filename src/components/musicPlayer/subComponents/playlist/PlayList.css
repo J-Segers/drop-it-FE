@@ -1,0 +1,19 @@
+.playlist {
+    width: auto;
+    height: auto;
+    background: darkgrey;
+    grid-area: playlist;
+    overflow-x: hidden;
+}
+
+.playlist::-webkit-scrollbar {
+    width: 5px;
+}
+
+.playlist::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+
+.playlist::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+}

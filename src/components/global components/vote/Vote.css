@@ -1,0 +1,59 @@
+.vote-container {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--player-button-color);
+    border-radius: 100%;
+}
+
+.up-vote, .down-vote {
+    position: fixed;
+}
+
+.up-vote::before {
+    width: 8px;
+    height: 14px;
+    position: absolute;
+    background: var(--up-vote-color);
+    content: "";
+    left: -6px;
+    bottom: -12px;
+}
+
+.up-vote::after {
+    width: 0;
+    height: 0;
+    position: absolute;
+    content: "";
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--up-vote-color);
+    border-left: 10px solid transparent;
+    bottom: 2px;
+    left: -12px;
+}
+
+.down-vote::before {
+    width: 8px;
+    height: 14px;
+    position: absolute;
+    background: var(--down-vote-color);
+    content: "";
+    left: -6px;
+    bottom: -4px;
+}
+
+.down-vote::after {
+    width: 0;
+    height: 0;
+    position: absolute;
+    content: "";
+    border-top: 10px solid var(--down-vote-color);
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid transparent;
+    left: -12px;
+    top: 4px;
+}
