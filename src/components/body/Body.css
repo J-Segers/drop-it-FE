@@ -1,0 +1,13 @@
+#page-body-small, #page-body-large {
+    width: 1200px;
+    border: 1px black solid;
+    margin-top: 16px;
+}
+
+#page-body-small {
+    height: calc(100vh - var(--header-height) - var(--large-player-height) - var(--footer-height) - 16px);
+}
+
+#page-body-large {
+    height: calc(100vh - var(--header-height) - var(--small-player-height) - var(--footer-height) - 16px);
+}

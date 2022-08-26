@@ -1,6 +1,8 @@
 :root {
   --header-height: 70px;
   --footer-height: 50px;
+  --large-player-height: 350px;
+  --small-player-height: 70px;
   --main-color: midnightblue;
   --button-color: cornflowerblue;
   --up-vote-color : lawngreen;
