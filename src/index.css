@@ -1,3 +1,14 @@
+:root {
+  --main-color: midnightblue;
+  --button-color: cornflowerblue;
+  --up-vote-color : lawngreen;
+  --down-vote-color: red;
+  --player-visualizer: #222222;
+}
+
 body {
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, serif;
   margin: 0;
 }

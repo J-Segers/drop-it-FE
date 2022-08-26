@@ -1,0 +1,41 @@
+#user-menu-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px var(--main-color) solid;
+    border-radius: 50%;
+    margin: 12px 16px;
+    overflow: hidden;
+}
+
+#user-menu-container > img {
+    height: 50px;
+}
+
+#menu-open-container {
+    width: 100px;
+    height: 51px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background:var(--main-color);
+    border: 2px solid var(--main-color);
+    position: absolute;
+    z-index: 10;
+    top: 63px;
+    right: 16px;
+}
+
+#menu-open-container > a {
+    width: 100%;
+    height: 25px;
+    display: block;
+}
+
+#menu-closed-container > * {
+    visibility: hidden;
+}

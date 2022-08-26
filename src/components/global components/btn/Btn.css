@@ -1,0 +1,13 @@
+.btn {
+    width: 100px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Arial", "serif";
+    background-color: white;
+}
+
+.btn:hover {
+    background: var(--button-color);
+}

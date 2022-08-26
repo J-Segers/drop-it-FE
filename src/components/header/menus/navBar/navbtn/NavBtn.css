@@ -1,0 +1,19 @@
+.nav-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.nav-btn:hover {
+    filter: invert(100%);
+    background-color: #9b6a12;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
