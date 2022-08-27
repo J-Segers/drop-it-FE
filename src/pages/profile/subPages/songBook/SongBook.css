@@ -19,3 +19,47 @@
 .song-book-container::-webkit-scrollbar-thumb {
     background: var(--main-color);
 }
+
+#upload-btn {
+    width: 150px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: var(--main-color);
+    margin: 8px;
+}
+
+#upload-filler {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: relative;
+}
+
+#upload-filler:before {
+    width: 0;
+    height: 0;
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: 30px;
+    border-left: 30px solid transparent;
+    border-top: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid  var(--main-color);
+}
+
+#upload-filler:after {
+    width: 30px;
+    height: 40px;
+    content: "";
+    position: absolute;
+    background-color: var(--main-color);
+    left: calc(45px / 2);
+    bottom: 0;
+
+}

@@ -3,7 +3,10 @@
   --footer-height: 50px;
   --large-player-height: 350px;
   --small-player-height: 70px;
-  --main-color: midnightblue;
+  --profile-header-height: 116px;
+  --profile-body-height: calc(100vh - var(--header-height) - var(--small-player-height) - var(--profile-header-height) - var(--footer-height));
+  --main-color: #8c8cb8;
+  --main-border-color: midnightblue;
   --button-color: cornflowerblue;
   --up-vote-color : lawngreen;
   --down-vote-color: red;

@@ -9,7 +9,7 @@
 
 #profile-header {
     width: 1200px;
-    height: 116px;
+    height: var(--profile-header-height);
     display: flex;
     justify-content: space-between;
     align-items: end;

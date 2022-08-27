@@ -6,6 +6,7 @@ import Home from "../../pages/home/Home";
 import Profile from "../../pages/profile/Profile";
 import Info from "../../pages/profile/subPages/info/Info";
 import SongBook from "../../pages/profile/subPages/songBook/SongBook";
+import Stats from "../../pages/profile/subPages/stats/Stats";
 
 function Body() {
     const {isLargePlayer} = useContext(MusicPlayerContext);
@@ -16,7 +17,7 @@ function Body() {
                 <Route path={"/profile/*"} element={<Profile />}>
                     <Route path={"info"} element={<Info />} />
                     <Route path={"songs"} element={<SongBook />} />
-                    {/*<Route path={"stats"} element={<Stats />} />*/}
+                    <Route path={"stats"} element={<Stats />} />
                     {/*<Route path={"settings"} element={<Settings />} />*/}
                 </Route>
             </Routes>

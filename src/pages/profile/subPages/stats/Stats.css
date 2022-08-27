@@ -1,0 +1,29 @@
+#stats-container {
+    width: 1200px;
+    height: var(--profile-body-height);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: start;
+    background: lawngreen;
+}
+
+#stats-container > h2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart {
+    width: 410px;
+    height: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 1px 1px 5px blue;
+}
