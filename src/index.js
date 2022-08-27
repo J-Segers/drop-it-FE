@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import MusicPlayerProvider from "./context/MusicPlayerProvider";
+import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <MusicPlayerProvider>
-          <App />
-      </MusicPlayerProvider>
+      <BrowserRouter>
+          <MusicPlayerProvider>
+              <App />
+          </MusicPlayerProvider>
+      </BrowserRouter>
   </React.StrictMode>
 );
 
