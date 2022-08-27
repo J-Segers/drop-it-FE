@@ -5,5 +5,17 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.schedule-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.schedule-container::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+
+.schedule-container::-webkit-scrollbar-thumb {
+    background: var(--main-color);
 }

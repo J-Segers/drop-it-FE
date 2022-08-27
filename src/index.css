@@ -16,4 +16,9 @@ body {
   height: 100vh;
   font-family: Arial, serif;
   margin: 0;
+  /*overflow: hidden;*/
+}
+
+a {
+  text-decoration: none;
 }

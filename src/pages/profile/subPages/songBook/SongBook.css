@@ -1,0 +1,21 @@
+.song-book-container {
+    width: auto;
+    height: calc(100vh - var(--header-height) - var(--small-player-height) - var(--footer-height) - 135px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+.song-book-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.song-book-container::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+
+.song-book-container::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+}

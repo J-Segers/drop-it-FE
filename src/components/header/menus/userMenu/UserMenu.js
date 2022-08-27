@@ -3,6 +3,7 @@ import "./UserMenu.css";
 import defaultProfile from "../../../../assets/profile-default.png";
 import userProfileImg from "../../../../assets/JackBlack.jpg";
 import Btn from "../../../global components/btn/Btn";
+import {NavLink} from "react-router-dom";
 
 function UserMenu() {
 
@@ -28,7 +29,9 @@ function UserMenu() {
             {loggedIn ? <img src={userProfileImg} alt={""} /> : <img src={defaultProfile} alt={""}/> }
             <div  className={menuState ? "user-menu-open" : "user-menu-closed"} />
             <div id={`menu-${menuState ? "open" : "closed"}-container`}>
-                <Btn text={"profile"} />
+                <NavLink to={"/profile/info"} className={"inActiveClass"} activeClassName={"activeClass"}>
+                    <Btn text={"profile"} />
+                </NavLink>
                 {/*button will eventually toggle between login and log out*/}
                 <Btn text={"log in"} />
             </div>

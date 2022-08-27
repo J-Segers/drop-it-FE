@@ -1,0 +1,27 @@
+#info-container {
+    width: 1200px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin: 16px calc((100vw - 1200px) / 2);
+}
+
+#profile-info {
+    width: 550px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.info-item {
+    width: 550px;
+    height: auto;
+}
+
+
+#info-image {
+    width: 550px;
+}
