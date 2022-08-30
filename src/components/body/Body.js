@@ -18,8 +18,8 @@ function Body() {
                     <Route path={"info"} element={<Info />} />
                     <Route path={"songs"} element={<SongBook />} />
                     <Route path={"stats"} element={<Stats />} />
-                    {/*<Route path={"settings"} element={<Settings />} />*/}
                 </Route>
+                {/*<Route path={"settings"} element={<Settings />} />*/}
             </Routes>
         </div>
     );

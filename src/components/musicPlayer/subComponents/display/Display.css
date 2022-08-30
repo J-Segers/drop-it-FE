@@ -1,11 +1,12 @@
 #display {
-    width: 300px;
+    width: 284px;
     height: Calc(100% - 16px);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     background-color: var(--displayColor);
     border-radius: 8px;
+    padding: 0 8px;
 }
 
 .song-info {

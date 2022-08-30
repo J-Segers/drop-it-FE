@@ -10,7 +10,7 @@
     width: 0;
     height: 0;
     border-top: 20px solid transparent;
-    border-right: 40px solid var(--button-color);
+    border-right: 40px solid var(--main-border-color);
     border-bottom: 20px solid transparent;
     border-left: 0 solid transparent;
 }
@@ -18,7 +18,7 @@
 .play-btn-playing {
     width: 15px;
     height: 40px;
-    background-color: var(--button-color);
+    background-color: var(--main-border-color);
     margin: 5px 30px 5px 5px;
     position: fixed;
 }
@@ -26,7 +26,7 @@
 .play-btn-playing::after {
     width: 15px;
     height: 40px;
-    background-color: var(--button-color);
+    background-color: var(--main-border-color);
     content: "";
     left: 30px;
     position: absolute;

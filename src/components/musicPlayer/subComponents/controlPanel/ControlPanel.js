@@ -1,6 +1,6 @@
 import React from 'react';
 import "./ControlPanel.css";
-import Vote from "../../../global components/vote/Vote";
+import Vote from "../../../globalComponents/vote/Vote";
 import Display from "../display/Display";
 import Controls from "./controls/Controls";
 

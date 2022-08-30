@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import "./Home.css";
 import {MusicPlayerContext} from "../../context/MusicPlayerProvider";
-import Schedule from "../../components/global components/schedule/Schedule";
+import Schedule from "../../components/globalComponents/schedule/Schedule";
 
 function Home() {
     const {togglePlayer} = useContext(MusicPlayerContext);

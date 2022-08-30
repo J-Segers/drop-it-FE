@@ -8,7 +8,7 @@
     width: 0;
     height: 0;
     border-top: 20px solid transparent;
-    border-right: 20px solid var(--button-color);
+    border-right: 20px solid var(--main-border-color);
     border-bottom: 20px solid transparent;
     border-left: 20px solid transparent;
     position: fixed;
@@ -19,7 +19,7 @@
     width: 15px;
     height: 40px;
     content: "";
-    background: var(--button-color);
+    background: var(--main-border-color);
     position: absolute;
     top: -20px;
     left: -20px

@@ -43,3 +43,7 @@
     border-bottom: 1px solid var(--main-color);
 }
 
+#profile-body {
+    height: 100%;
+}
+

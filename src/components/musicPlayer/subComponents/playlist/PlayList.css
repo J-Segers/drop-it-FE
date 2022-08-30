@@ -15,5 +15,5 @@
 }
 
 .playlist::-webkit-scrollbar-thumb {
-    background: var(--main-color);
+    background: var(--main-border-color);
 }

@@ -1,27 +1,119 @@
 #info-container {
     width: 1200px;
     height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+    display: grid;
+    grid-template-rows: 5% 45% 45% 5%;
+    grid-template-columns: 5% 40% 5% 40% 5%;
+    grid-template-areas:
+            ". . . . settings"
+            ". info . photo ."
+            ". info . photo ."
+            ". . . . ."
+    ;
+    gap: 8px;
     margin: 16px calc((100vw - 1200px) / 2);
 }
 
 #profile-info {
-    width: 550px;
-    height: 100%;
+    width: 518px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-items: center;
+    align-items: start;
+    grid-area: info;
+    border: 1px solid black;
+    padding: 0 16px;
 }
 
 .info-item {
     width: 550px;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 8px;
 }
 
+.info-item > p{
+    width: 500px;
+    height: auto;
+    text-align: justify;
+}
 
 #info-image {
     width: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: photo;
+    border: 1px solid black;
+}
+
+#info-image > img {
+    width: 50%;
+}
+
+#profile-settings {
+    grid-area: settings;
+}
+
+#edit-info-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#edit-profile-info {
+    width: 100%;
+    height: calc(100% - 16px);
+    display: grid;
+    grid-template-rows: 5% 40% 40% 5%;
+    grid-template-columns: 5% 40% 5% 40% 5%;
+    grid-template-areas:
+            ". . . . close"
+            ". items . editPhoto ."
+            ". items . editPhoto ."
+            ". . . . save"
+    ;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+#items {
+    grid-area: items;
+}
+
+.edit-info-item {
+    width: 550px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 8px;
+}
+
+#edit-info-image {
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: editPhoto;
+}
+
+#edit-info-image > img {
+    width: 50%;
+}
+
+#profile-save-btn {
+    grid-area: save;
+}
+
+#close-btn {
+    grid-area: close;
 }

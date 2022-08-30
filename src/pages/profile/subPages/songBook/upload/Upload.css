@@ -1,0 +1,77 @@
+#popup-bg {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+
+#popup-upload-container {
+    width: 700px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    z-index: 10;
+}
+
+#close-popup {
+    margin: 16px 16px 0 16px;
+}
+
+#popup-upload-container > form {
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    display: grid;
+    grid-template-columns: 16px 310px 148px 148px 16px;
+    grid-template-rows: 40% 40% 10%;
+    grid-template-areas: ". info cover cover ."
+                         ". story story story ."
+                         ". . . submit .";
+    gap: 16px;
+    margin: 16px 16px 0  16px;
+}
+
+#upload-song-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: end;
+    grid-area: info;
+}
+
+#upload-song-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: cover;
+}
+
+#upload-song-cover > img {
+    width: 175px;
+}
+
+#upload-song-story {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: story;
+}
+
+#upload-song-submit {
+    grid-area: submit;
+}
+
+.update-img-btn {
+    z-index: 20;
+}

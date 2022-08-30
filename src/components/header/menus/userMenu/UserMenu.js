@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import "./UserMenu.css";
 import defaultProfile from "../../../../assets/profile-default.png";
 import userProfileImg from "../../../../assets/JackBlack.jpg";
-import Btn from "../../../global components/btn/Btn";
+import Btn from "../../../globalComponents/btn/Btn";
 import {NavLink} from "react-router-dom";
 
 function UserMenu() {

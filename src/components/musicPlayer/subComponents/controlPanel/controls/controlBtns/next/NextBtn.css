@@ -7,7 +7,7 @@
 .next-btn {
     width: 15px;
     height: 40px;
-    background: var(--button-color);
+    background: var(--main-border-color);
     position: fixed;
     margin: 5px 5px 5px 30px;
 }
@@ -18,7 +18,7 @@
     border-top: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 20px solid transparent;
-    border-left: 20px solid var(--button-color);
+    border-left: 20px solid var(--main-border-color);
     content: "";
     position: absolute;
     right: 0;
