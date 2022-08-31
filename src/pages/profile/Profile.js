@@ -13,29 +13,27 @@ function Profile() {
     })
 
     return (
-        <PopupProvider>
-            <div id={"profile-container"}>
-                <div id={"profile-header"}>
-                    <div id={"profile-image"}>
-                        <img src={profileImage} alt="User profile picture"/>
-                    </div>
-                    <div id={"profile-menu"}>
-                        <NavLink to={"info"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                            <Btn text={"info"}/>
-                        </NavLink>
-                        <NavLink to={"songs"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                            <Btn text={"songs"} />
-                        </NavLink>
-                        <NavLink to={"stats"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                            <Btn text={"stats"} />
-                        </NavLink>
-                    </div>
+        <div id={"profile-container"}>
+            <div id={"profile-header"}>
+                <div id={"profile-image"}>
+                    <img src={profileImage} alt="User profile picture"/>
                 </div>
-                <div id={"profile-body"}>
-                    <Outlet />
+                <div id={"profile-menu"}>
+                    <NavLink to={"info"} className={"inActiveClass"} activeClassName={"activeClass"}>
+                        <Btn text={"info"}/>
+                    </NavLink>
+                    <NavLink to={"songs"} className={"inActiveClass"} activeClassName={"activeClass"}>
+                        <Btn text={"songs"} />
+                    </NavLink>
+                    <NavLink to={"stats"} className={"inActiveClass"} activeClassName={"activeClass"}>
+                        <Btn text={"stats"} />
+                    </NavLink>
                 </div>
             </div>
-        </PopupProvider>
+            <div id={"profile-body"}>
+                <Outlet />
+            </div>
+        </div>
     );
 }
 

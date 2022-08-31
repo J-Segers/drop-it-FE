@@ -1,0 +1,39 @@
+#log-in {
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 40px 20px 40px 20px 20px;
+    grid-template-areas:
+            ". email email email email email ."
+            ". . . . . . ."
+            ". password password password password password ."
+            ". error error error error error ."
+            ". . . . .login ."
+    ;
+}
+
+.log-in-info-email, .log-in-info-password {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: auto;
+}
+
+.log-in-info-email {
+    grid-area: email;
+}
+
+.log-in-info-password {
+    grid-area: password;
+}
+
+#log-in-btn {
+    grid-area: login;
+}
+
+.error-message {
+    grid-area: error;
+}

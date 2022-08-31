@@ -1,0 +1,53 @@
+#registration {
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 40px 20px 40px 20px 130px 20px;
+    grid-template-areas:
+            ". username username username username username ."
+            ". . . . . . ."
+            ". email email email email email ."
+            ". . . . . . ."
+            ". password password password password password ."
+            ". . . . . register ."
+    ;
+}
+
+.new-user-info-username, .new-user-info-email, .new-user-info-password {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: auto;
+}
+
+.new-user-info-username {
+    height: 50px;
+    grid-area: username;
+}
+
+.new-user-info-email {
+    height: 50px;
+    grid-area: email;
+}
+
+.new-user-info-password {
+    height: 100%;
+    grid-area: password;
+}
+
+.new-user-info-password-item {
+    width: auto;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-self: start;
+    margin: auto;
+}
+
+#registration-btn {
+    grid-area: register;
+}

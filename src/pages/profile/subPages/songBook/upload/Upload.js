@@ -4,7 +4,7 @@ import {PopUpContext} from "../../../../../context/PopupProvider";
 import {useForm} from 'react-hook-form';
 
 function Upload() {
-    const {togglePopUp} = useContext(PopUpContext);
+    const {toggleUploadPopUp} = useContext(PopUpContext);
     const {register, handleSubmit} = useForm();
     const [preview, setPreview] = useState(null);
 
@@ -13,7 +13,7 @@ function Upload() {
     },[preview]);
 
     function handleClosePopUp() {
-        togglePopUp(false);
+        toggleUploadPopUp(false);
     }
 
     function handlePreviewChange(e) {
@@ -22,7 +22,7 @@ function Upload() {
     }
 
     function onSongFormSubmit(e) {
-        togglePopUp(false);
+        toggleUploadPopUp(false);
         console.log(e);
     }
 

@@ -1,11 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import "./UserMenu.css";
 import defaultProfile from "../../../../assets/profile-default.png";
 import userProfileImg from "../../../../assets/JackBlack.jpg";
 import Btn from "../../../globalComponents/btn/Btn";
 import {NavLink} from "react-router-dom";
+import {PopUpContext} from "../../../../context/PopupProvider";
 
 function UserMenu() {
+    const {toggleLogInPopUp} = useContext(PopUpContext);
 
     const [menuState, setMenuState] = useState(false);
     const [loggedIn, toggleLoggedIn] = useState(true); //will be changed to context
@@ -24,7 +26,6 @@ function UserMenu() {
 
 
     return (
-
         <div ref={btnRef} id={"user-menu-container"} onClick={() => {setMenuState(menuState => !menuState)}}>
             {loggedIn ? <img src={userProfileImg} alt={""} /> : <img src={defaultProfile} alt={""}/> }
             <div  className={menuState ? "user-menu-open" : "user-menu-closed"} />
@@ -33,7 +34,9 @@ function UserMenu() {
                     <Btn text={"profile"} />
                 </NavLink>
                 {/*button will eventually toggle between login and log out*/}
-                <Btn text={"log in"} />
+                <div onClick={() => toggleLogInPopUp(true)}>
+                    <Btn text={"log in"} />
+                </div>
             </div>
         </div>
     );

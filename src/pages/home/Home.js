@@ -2,13 +2,15 @@ import React, {useContext, useEffect} from 'react';
 import "./Home.css";
 import {MusicPlayerContext} from "../../context/MusicPlayerProvider";
 import Schedule from "../../components/globalComponents/schedule/Schedule";
+import {PopUpContext} from "../../context/PopupProvider";
 
 function Home() {
     const {togglePlayer} = useContext(MusicPlayerContext);
+    const {toggleLogInPopUp} = useContext(PopUpContext);
 
     useEffect(() => {
         togglePlayer(true);
-    })
+    },[]);
 
     return (
         <>
@@ -16,7 +18,7 @@ function Home() {
                 <p id={"about-dropit"}>
                     Doggo ipsum shooberino shoober ruff woofer extremely cuuuuuute vvv, smol ur givin me a spook lotsa pats. Shoob the neighborhood pupper shoober doggo blop, snoot dat tungg tho floofs. Borking doggo the neighborhood pupper you are doin me a concern, wow such tempt. Long doggo very jealous pupper long doggo you are doing me a frighten dat tungg tho wrinkler, many pats boofers sub woofer long woofer, pats noodle horse what a nice floof corgo. Woofer very jealous pupper puggo you are doin me a concern, shoob. Boof super chub blep stop it fren, very taste wow long doggo. doge shoober wow such tempt. Borkf tungg super chub, ur givin me a spook. Shibe waggy wags heckin angery woofer sub woofer shoob shoober, ur givin me a spook borkf floofs fluffer boof, snoot long water shoob blop I am bekom fat. Borking doggo waggy wags long doggo smol borking doggo with a long snoot for pats ruff lotsa pats long water shoob puggorino floofs, doggo wrinkler stop it fren I am bekom fat aqua doggo shooberino sub woofer.
                 </p>
-                <div id={"register-btn"} onClick={() => {}}>
+                <div id={"register-btn"} onClick={() => toggleLogInPopUp(true)}>
                     register
                 </div>
                 <p id={"pitch"}>

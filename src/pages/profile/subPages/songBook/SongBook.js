@@ -5,7 +5,7 @@ import Upload from "./upload/Upload";
 import {PopUpContext} from "../../../../context/PopupProvider";
 
 function Songs() {
-    const {popUpVisible, togglePopUp} = useContext(PopUpContext);
+    const {popUpUploadVisible, toggleUploadPopUp} = useContext(PopUpContext);
     let songList = [["title", "artist", "collabs", "length", "genre", "songwriter", "file"],
                     ["title", "artist", "collabs", "length", "genre", "songwriter", "file"],
                     ["title", "artist", "collabs", "length", "genre", "songwriter", "file"],
@@ -41,11 +41,11 @@ function Songs() {
 
     return (
         <div className={"song-book-container"}>
-            <div id={"upload-btn"} onClick={() => togglePopUp(true)}>
+            <div id={"upload-btn"} onClick={() => toggleUploadPopUp(true)}>
                 <div id={"upload-filler"} />
                 <h3>add new song</h3>
             </div>
-            {popUpVisible ? <Upload /> : ""}
+            {popUpUploadVisible ? <Upload /> : ""}
             {songList.map((songInfo) => {
             return <Song song={songInfo}/>;
         })}</div>

@@ -3,18 +3,27 @@ import React, {createContext, useState} from 'react';
 export const PopUpContext = createContext(null);
 
 function PopupProvider({children}) {
-    const [popUpVisible, togglePopUpVisible] = useState(false);
+    const [popUpUploadVisible, togglePopUpUploadVisible] = useState(false);
+    const [popUpLogInVisible, togglePopUpLogInVisible] =useState(false);
 
-    function togglePopUp(newValue) {
-        if (popUpVisible === true && newValue === false) {
-            togglePopUpVisible(false);
-        } else if (popUpVisible === false && newValue === true) {
-            togglePopUpVisible(true);
+    function toggleUploadPopUp(newValue) {
+        if (popUpUploadVisible === true && newValue === false) {
+            togglePopUpUploadVisible(false);
+        } else if (popUpUploadVisible === false && newValue === true) {
+            togglePopUpUploadVisible(true);
+        }
+    }
+
+    function toggleLogInPopUp(newValue) {
+        if (popUpLogInVisible === true && newValue === false) {
+            togglePopUpLogInVisible(false);
+        } else if (popUpLogInVisible === false && newValue === true) {
+            togglePopUpLogInVisible(true);
         }
     }
 
     return (
-        <PopUpContext.Provider value={{popUpVisible, togglePopUp}}>
+        <PopUpContext.Provider value={{popUpUploadVisible, toggleUploadPopUp, popUpLogInVisible, toggleLogInPopUp}}>
             {children}
         </PopUpContext.Provider>
     );
