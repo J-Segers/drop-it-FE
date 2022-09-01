@@ -13,7 +13,7 @@
     ;
 }
 
-.log-in-info-email, .log-in-info-password {
+.log-in-info-username, .log-in-info-password {
     width: auto;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
     margin: auto;
 }
 
-.log-in-info-email {
+.log-in-info-username {
     grid-area: email;
 }
 

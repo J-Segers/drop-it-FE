@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Registration.css";
 import {useForm} from "react-hook-form";
 import checkEmailValidity from "../../../helperFuncties/validateEmail";
 import getPasswordErrors from "../../../helperFuncties/validatePassword";
 import axios from "axios";
+import {PopUpContext} from "../../../context/PopupProvider";
 
 function Registration() {
     const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ function Registration() {
     const [errorMessage, setErrorMessage] = useState("");
     const [passed, togglePassed] = useState(false);
     const [isEqual, toggleIsEqual] = useState(false);
+    const {toggleLogInPopUp} = useContext(PopUpContext);
     const {register, handleSubmit} = useForm();
 
     useEffect(() => {
@@ -29,7 +31,6 @@ function Registration() {
             setErrorMessage(result);
             togglePassed(false);
         }
-        console.log(password);
     }, [password]);
 
     useEffect(() => {
@@ -38,11 +39,15 @@ function Registration() {
         } else {
             toggleIsEqual(false);
         }
-        console.log(checkDuplicatePassword);
     }, [password, checkDuplicatePassword, passed]);
 
-    function onFormSubmitRegistration(data) {
-        console.log(data);
+    async function onFormSubmitRegistration(data) {
+        try {
+            const result = await axios.post(`http://localhost:8080/v1/users`, data);
+            console.log(result);
+        } catch (e) {
+
+        }
     }
 
     return (
