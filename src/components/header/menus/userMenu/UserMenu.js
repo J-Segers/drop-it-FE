@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 import {PopUpContext} from "../../../../context/PopupProvider";
 
 function UserMenu() {
-    const {toggleLogInPopUp} = useContext(PopUpContext);
+    const {toggleLogInPopUp, landingLogin, handlePopUpLanding} = useContext(PopUpContext);
 
     const [menuState, setMenuState] = useState(false);
     const [loggedIn, toggleLoggedIn] = useState(true); //will be changed to context
@@ -34,7 +34,10 @@ function UserMenu() {
                     <Btn text={"profile"} />
                 </NavLink>
                 {/*button will eventually toggle between login and log out*/}
-                <div onClick={() => toggleLogInPopUp(true)}>
+                <div onClick={() => {
+                    handlePopUpLanding(true);
+                    toggleLogInPopUp(true)
+                }}>
                     <Btn text={"log in"} />
                 </div>
             </div>

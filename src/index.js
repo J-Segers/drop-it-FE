@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import MusicPlayerProvider from "./context/MusicPlayerProvider";
 import {BrowserRouter} from "react-router-dom";
 import PopupProvider from "./context/PopupProvider";
+import AuthenticationContextProvider from "./context/AuthenticationContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <BrowserRouter>
-          <PopupProvider>
-              <MusicPlayerProvider>
-                  <App />
-              </MusicPlayerProvider>
-          </PopupProvider>
+          <AuthenticationContextProvider>
+              <PopupProvider>
+                  <MusicPlayerProvider>
+                      <App />
+                  </MusicPlayerProvider>
+              </PopupProvider>
+          </AuthenticationContextProvider>
       </BrowserRouter>
   </React.StrictMode>
 );

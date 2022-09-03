@@ -5,16 +5,7 @@ import Registration from "./registration/Registration";
 import {PopUpContext} from "../../context/PopupProvider";
 
 function RegistrationAndLogin() {
-    const {toggleLogInPopUp} = useContext(PopUpContext)
-    const [isLogIn, toggleLogIn] = useState(true);
-
-    function handleFormToggle(newValue) {
-        if(isLogIn && newValue === false) {
-            toggleLogIn(false);
-        } else if(!isLogIn && newValue === true) {
-            toggleLogIn(true);
-        }
-    }
+    const {toggleLogInPopUp, landingLogin, handlePopUpLanding} = useContext(PopUpContext);
 
     return (
         <div id={"registration-login-popup-backdrop"}>
@@ -28,20 +19,20 @@ function RegistrationAndLogin() {
                 <div id="registration-login-header">
                     <input
                         type={"button"}
-                        id={isLogIn ? "registration-title" : "registration-title-underline"}
-                        onClick={() => handleFormToggle(false)}
+                        id={landingLogin ? "registration-title" : "registration-title-underline"}
+                        onClick={() => handlePopUpLanding(false)}
                         value={"Register"}
                     />
                     <input
                         type={"button"}
-                        id={isLogIn ? "login-title-underline" : "login-title"}
-                        onClick={() => handleFormToggle(true)}
+                        id={landingLogin ? "login-title-underline" : "login-title"}
+                        onClick={() => handlePopUpLanding(true)}
                         value={"Log in"}
                     />
                 </div>
                 <hr />
                 <div id="form-container">
-                    {isLogIn ? <LogIn /> : <Registration />}
+                    {landingLogin ? <LogIn /> : <Registration />}
                 </div>
             </div>
         </div>

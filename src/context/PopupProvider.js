@@ -5,6 +5,7 @@ export const PopUpContext = createContext(null);
 function PopupProvider({children}) {
     const [popUpUploadVisible, togglePopUpUploadVisible] = useState(false);
     const [popUpLogInVisible, togglePopUpLogInVisible] =useState(false);
+    const [landingLogin, toggleLandingLogin] = useState(true);
 
     function toggleUploadPopUp(newValue) {
         if (popUpUploadVisible === true && newValue === false) {
@@ -22,8 +23,16 @@ function PopupProvider({children}) {
         }
     }
 
+    function handlePopUpLanding(newValue) {
+        if (landingLogin === true && newValue === false) {
+            toggleLandingLogin(false);
+        } else if (landingLogin === false && newValue === true) {
+            toggleLandingLogin(true);
+        }
+    }
+
     return (
-        <PopUpContext.Provider value={{popUpUploadVisible, toggleUploadPopUp, popUpLogInVisible, toggleLogInPopUp}}>
+        <PopUpContext.Provider value={{popUpUploadVisible, toggleUploadPopUp, popUpLogInVisible, toggleLogInPopUp, landingLogin, handlePopUpLanding}}>
             {children}
         </PopUpContext.Provider>
     );

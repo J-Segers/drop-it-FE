@@ -4,49 +4,92 @@ import {useForm} from "react-hook-form";
 import checkEmailValidity from "../../../helperFuncties/validateEmail";
 import getPasswordErrors from "../../../helperFuncties/validatePassword";
 import axios from "axios";
-import {PopUpContext} from "../../../context/PopupProvider";
 
 function Registration() {
+    //validation
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [isValidEmail, toggleIsValidEmail] = useState(false);
     const [password, setPassword] = useState("");
-    const [checkDuplicatePassword, setCheckDuplicatePassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [passed, togglePassed] = useState(false);
+    const [checkPassword, setCheckPassword] = useState("");
     const [isEqual, toggleIsEqual] = useState(false);
-    const {toggleLogInPopUp} = useContext(PopUpContext);
+    const [passed, togglePassed] = useState(false);
+    const [validationCheck, toggleValidationCheck] = useState(false);
+
+    //errors
+    const [emailError, setEmailError] = useState("");
+    const [usernameError, setUsernameError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
     const {register, handleSubmit} = useForm();
 
     useEffect(() => {
-        toggleIsValidEmail(checkEmailValidity(email));
-    }, [email]);
+        console.log(isValidEmail + "\n" + isEqual + "\n" + passed);
+        if( isValidEmail && isEqual && passed) {
+            toggleValidationCheck(true)
+        } else {
+            toggleValidationCheck(false);
+        }
+    },[isValidEmail, isEqual, passed]);
+
+    useEffect(() => {
+        let result = checkEmailValidity(email)
+        console.log(result);
+        if(result) {
+            setEmailError("");
+            toggleIsValidEmail(true);
+         } else if(!result){
+            toggleIsValidEmail(false);
+            setEmailError("Not a valid email address")
+        }
+    }, [email, isValidEmail]);
+
+    function handleEmailUpdate(response) {
+        setEmail(response.value);
+    }
 
     useEffect(() => {
         const result = getPasswordErrors(password);
 
         if(result === "") {
-            setErrorMessage(result)
+            setPasswordError(result)
             togglePassed(true);
         } else {
-            setErrorMessage(result);
+            setPasswordError(result);
             togglePassed(false);
         }
     }, [password]);
 
+    function handlePasswordUpdate(response) {
+        setPassword(response.value);
+    }
+
     useEffect(() => {
-        if(password === checkDuplicatePassword && passed) {
+        if(password === checkPassword && passed) {
             toggleIsEqual(true);
         } else {
             toggleIsEqual(false);
         }
-    }, [password, checkDuplicatePassword, passed]);
+    }, [password, checkPassword, passed]);
 
     async function onFormSubmitRegistration(data) {
+        const BAD_REQUEST = 400;
         try {
-            const result = await axios.post(`http://localhost:8080/v1/users`, data);
+            const result = await axios.post(`http://localhost:8080/v1/users`, data).catch(err => {
+                    if(err.status === BAD_REQUEST){
+                        throw new Error(`${err.response.data}`);
+                    }
+                    throw err;
+                });
             console.log(result);
+            // toggleLogInPopUp(false);
         } catch (e) {
-
+            console.log(e)
+            if(e.response.data.toLowerCase().includes("email")) {
+                setEmailError(e.response.data);
+            } else if(e.response.data.toLowerCase().includes("username")) {
+                setUsernameError(e.response.data);
+            }
         }
     }
 
@@ -56,11 +99,12 @@ function Registration() {
                 <div className="new-user-info-username">
                     <label htmlFor={"new-user-username"}>Username</label>
                     <input type="text" id={"new-user-username"} {...register("username",{required: true})} />
+                    <label className={"error-message"}>{username !== "" ? emailError : ""}</label>
                 </div>
                 <div className="new-user-info-email">
                     <label htmlFor={"new-user-email"}>Email</label>
-                    <input type="text" id={"new-user-email"} onInput={(e) => setEmail(e.target.value)} {...register("email",{required: true})} />
-                    {!isValidEmail ? <label className={"error-message"}>{email !== "" ? "email not valid" : ""}</label> : ""}
+                    <input type="text" id={"new-user-email"} onInput={(e) => handleEmailUpdate(e.target)} {...register("email",{required: true})} />
+                    <label className={"error-message"}>{email !== "" ? emailError : ""}</label>
                 </div>
                 <div className="new-user-info-password">
                     <div className="new-user-info-password-item">
@@ -68,10 +112,10 @@ function Registration() {
                         <input
                             type="password"
                             className={"new-user-password"}
-                            onInput={(e) => setPassword(e.target.value)}
+                            onInput={(e) => handlePasswordUpdate(e.target)}
                             {...register("password",{required: true})}
                         />
-                        {passed ? "" : <label className={"error-message"}>{errorMessage}</label>}
+                        <label className={"error-message"}>{passed ? "" : passwordError}</label>
 
                     </div>
                     <div className="new-user-info-password-item">
@@ -79,12 +123,12 @@ function Registration() {
                         <input
                             type="password"
                             className={"new-user-password"}
-                            onChange={(e) => setCheckDuplicatePassword(e.target.value)}
+                            onChange={(e) => setCheckPassword(e.target.value)}
                         />
-                        {isEqual ? "" : <label className={"error-message"}>{checkDuplicatePassword === "" ? "" : "passwords don't match!"}</label>}
+                        {isEqual ? "" : <label className={"error-message"}>{checkPassword === "" ? "" : "passwords don't match!"}</label>}
                     </div>
                 </div>
-                <input type={"submit"} id={"registration-btn"} value={"register"} disabled={!isEqual} />
+                <input type={"submit"} id={"registration-btn"} value={"register"} disabled={!validationCheck} />
             </form>
         </>
     );

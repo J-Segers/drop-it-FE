@@ -1,21 +1,47 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./LogIn.css";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import {AuthenticationContext} from "../../../context/AuthenticationContextProvider";
 
 function LogIn() {
-    const [noMatch, toggleNoMatch] = useState(false);
 
-    const errorMessage = "Wrong username or password!";
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const {token, setToken, setUser} = useContext(AuthenticationContext);
 
     const {register, handleSubmit} = useForm();
 
+    useEffect(() => {
+        console.log(token);
+    }, [errorMessage, token]);
+
     async function onFormSubmit(data) {
         try {
-            const result = await axios.post("http://localhost:8080/auth", data);
-            console.log(result);
-        } catch (e) {
+            const tokenResult = await axios.post("http://localhost:8080/auth", data).catch(e => {
+                throw e;
+            });
 
+            setToken(tokenResult.data);
+
+            const userResult = onLoginAttemptSucces(data);
+
+            if(errorMessage !== "") {
+                setErrorMessage("");
+            }
+        } catch (e) {
+            if(e.response.status === 403){
+                setErrorMessage("Wrong username or password!");
+            }
+        }
+    }
+
+    async function onLoginAttemptSucces(data) {
+        try {
+            const userResult = await axios.get(`http://localhost:8080/v1/users/?username=${data.username}`, data);
+            setUser(userResult.data[0]);
+        } catch (e) {
+            
         }
     }
 
@@ -30,7 +56,7 @@ function LogIn() {
                     <label>wachtwoord</label>
                     <input type={"password"} {...register("password", {required: true})} />
                 </div>
-                {noMatch ? <label className={"error-message"}>{errorMessage}</label> : ""}
+                <label className={"error-message"}>{errorMessage === "" ? "" : errorMessage}</label>
                 <input type={"submit"} id={"log-in-btn"} value={"log in"}/>
             </form>
         </>
