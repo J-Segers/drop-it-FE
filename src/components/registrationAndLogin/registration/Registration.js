@@ -24,13 +24,12 @@ function Registration() {
     const {register, handleSubmit} = useForm();
 
     useEffect(() => {
-        console.log(isValidEmail + "\n" + isEqual + "\n" + passed);
-        if( isValidEmail && isEqual && passed) {
+        if(password !== "" && isValidEmail && isEqual && passed) {
             toggleValidationCheck(true)
         } else {
             toggleValidationCheck(false);
         }
-    },[isValidEmail, isEqual, passed]);
+    },[isValidEmail, isEqual, passed, password]);
 
     useEffect(() => {
         let result = checkEmailValidity(email)
@@ -76,20 +75,20 @@ function Registration() {
         const BAD_REQUEST = 400;
         try {
             const result = await axios.post(`http://localhost:8080/v1/users`, data).catch(err => {
+                console.log(err);
                     if(err.status === BAD_REQUEST){
-                        throw new Error(`${err.response.data}`);
+                        throw new Error(`${err.response}`);
                     }
                     throw err;
                 });
             console.log(result);
             // toggleLogInPopUp(false);
         } catch (e) {
-            console.log(e)
-            if(e.response.data.toLowerCase().includes("email")) {
-                setEmailError(e.response.data);
-            } else if(e.response.data.toLowerCase().includes("username")) {
-                setUsernameError(e.response.data);
-            }
+            // if(e.response.data.toLowerCase().includes("email")) {
+            //     setEmailError(e.response.data);
+            // } else if(e.response.data.toLowerCase().includes("username")) {
+            //     setUsernameError(e.response.data);
+            // }
         }
     }
 

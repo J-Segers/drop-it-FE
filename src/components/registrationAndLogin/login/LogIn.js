@@ -3,12 +3,14 @@ import "./LogIn.css";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {AuthenticationContext} from "../../../context/AuthenticationContextProvider";
+import {UserContext} from "../../../context/UserContextProvider";
 
 function LogIn() {
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const {token, setToken, setUser} = useContext(AuthenticationContext);
+    const {token, setToken} = useContext(AuthenticationContext);
+    const {fillUser, fillProfile} = useContext(UserContext);
 
     const {register, handleSubmit} = useForm();
 
@@ -39,9 +41,15 @@ function LogIn() {
     async function onLoginAttemptSucces(data) {
         try {
             const userResult = await axios.get(`http://localhost:8080/v1/users/?username=${data.username}`, data);
-            setUser(userResult.data[0]);
+            fillUser(userResult.data[0]);
+            console.log(userResult.data[0]);
+            const profileResult = await axios.get(`http://localhost:8080/v1/regular_users/${userResult.data[0].regularUserId}`);
+            fillProfile(profileResult.data)
+
+
+            console.log(profileResult.data);
         } catch (e) {
-            
+            console.log(e)
         }
     }
 

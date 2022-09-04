@@ -7,17 +7,20 @@ import MusicPlayerProvider from "./context/MusicPlayerProvider";
 import {BrowserRouter} from "react-router-dom";
 import PopupProvider from "./context/PopupProvider";
 import AuthenticationContextProvider from "./context/AuthenticationContextProvider";
+import UserContextProvider from "./context/UserContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <BrowserRouter>
           <AuthenticationContextProvider>
-              <PopupProvider>
-                  <MusicPlayerProvider>
-                      <App />
-                  </MusicPlayerProvider>
-              </PopupProvider>
+              <UserContextProvider>
+                  <PopupProvider>
+                      <MusicPlayerProvider>
+                          <App />
+                      </MusicPlayerProvider>
+                  </PopupProvider>
+              </UserContextProvider>
           </AuthenticationContextProvider>
       </BrowserRouter>
   </React.StrictMode>
