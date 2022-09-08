@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Info.css";
 import {useForm} from "react-hook-form";
 import defaultImg from "../../../../assets/tenaciousD-JackBlack.jpg";
+import {UserContext} from "../../../../context/UserContextProvider";
 
 function Info() {
     const {register, handleSubmit} = useForm();
+    const { } = useContext(UserContext);
 
     const [edit, toggleEdit] = useState(false);
     const [infoImage, setInfoImage] = useState(defaultImg);

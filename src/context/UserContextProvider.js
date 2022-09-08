@@ -1,23 +1,34 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 
 export const UserContext = createContext(null);
 
 function UserContextProvider({children}) {
 
     const [user, setUser] = useState({initial: "value"});
-    const [profile, setProfile] = useState({initial: "value"});
+    const [userProfile, setUserProfile] = useState({initial: "value"});
+    const [artist, setArtist] = useState({initial: "value"})
     const [isLoggedIn, toggleIsLoggedIn] = useState(false);
 
     function fillUser(profileObj) {
         setUser(profileObj);
     }
 
-    function fillProfile(profileObj) {
-        setProfile(profileObj);
+    function fillUserProfile(profileObj) {
+        setUserProfile(profileObj);
+    }
+
+    const data = {
+        user,
+        isLoggedIn,
+        toggleIsLoggedIn,
+        userProfile,
+        fillUser,
+        fillUserProfile
+
     }
 
     return (
-        <UserContext.Provider value={{user, isLoggedIn, toggleIsLoggedIn, profile, fillUser, fillProfile}}>
+        <UserContext.Provider value={data}>
             {children}
         </UserContext.Provider>
     );

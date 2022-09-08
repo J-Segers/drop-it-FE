@@ -4,7 +4,6 @@ import {MusicPlayerContext} from "../../context/MusicPlayerProvider";
 import {NavLink, Outlet} from "react-router-dom";
 import profileImage from "../../assets/JackBlack.jpg";
 import Btn from "../../components/globalComponents/btn/Btn";
-import PopupProvider from "../../context/PopupProvider";
 
 function Profile() {
     const {togglePlayer} = useContext(MusicPlayerContext);

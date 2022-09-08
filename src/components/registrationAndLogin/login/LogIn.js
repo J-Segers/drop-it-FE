@@ -2,31 +2,26 @@ import React, {useContext, useEffect, useState} from 'react';
 import "./LogIn.css";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import {AuthenticationContext} from "../../../context/AuthenticationContextProvider";
 import {UserContext} from "../../../context/UserContextProvider";
+import {AuthenticationContext} from "../../../context/AuthenticationContextProvider";
 
 function LogIn() {
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const {token, setToken} = useContext(AuthenticationContext);
-    const {fillUser, fillProfile} = useContext(UserContext);
+    const {login} = useContext(AuthenticationContext);
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit} = useForm() ;
 
-    useEffect(() => {
-        console.log(token);
-    }, [errorMessage, token]);
-
-    async function onFormSubmit(data) {
+    async function onLoginRequest(data) {
+        console.log(data)
         try {
-            const tokenResult = await axios.post("http://localhost:8080/auth", data).catch(e => {
-                throw e;
-            });
+            const response = await axios.post("http://localhost:8080/auth", data)
+                .catch(e => e);
 
-            setToken(tokenResult.data);
+            localStorage.setItem("token", response.data);
 
-            const userResult = onLoginAttemptSucces(data);
+            login(response.data);
 
             if(errorMessage !== "") {
                 setErrorMessage("");
@@ -36,26 +31,12 @@ function LogIn() {
                 setErrorMessage("Wrong username or password!");
             }
         }
-    }
 
-    async function onLoginAttemptSucces(data) {
-        try {
-            const userResult = await axios.get(`http://localhost:8080/v1/users/?username=${data.username}`, data);
-            fillUser(userResult.data[0]);
-            console.log(userResult.data[0]);
-            const profileResult = await axios.get(`http://localhost:8080/v1/regular_users/${userResult.data[0].regularUserId}`);
-            fillProfile(profileResult.data)
-
-
-            console.log(profileResult.data);
-        } catch (e) {
-            console.log(e)
-        }
     }
 
     return (
         <>
-            <form id="log-in" onSubmit={handleSubmit(onFormSubmit)}>
+            <form id="log-in" onSubmit={handleSubmit(onLoginRequest)}>
                 <div className="log-in-info-username">
                     <label htmlFor={"login-username"}>username</label>
                     <input type="text" id={"login-username"} {...register("username", {required: true})} />

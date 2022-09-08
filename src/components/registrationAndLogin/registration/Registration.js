@@ -32,6 +32,12 @@ function Registration() {
     },[isValidEmail, isEqual, passed, password]);
 
     useEffect(() => {
+        if(username === "") {
+            setUsernameError("");
+        }
+    }, [username]);
+
+    useEffect(() => {
         let result = checkEmailValidity(email)
         console.log(result);
         if(result) {
@@ -74,7 +80,7 @@ function Registration() {
     async function onFormSubmitRegistration(data) {
         const BAD_REQUEST = 400;
         try {
-            const result = await axios.post(`http://localhost:8080/v1/users`, data).catch(err => {
+            const result = await axios.post(`http://localhost:8080/users`, data).catch(err => {
                 console.log(err);
                     if(err.status === BAD_REQUEST){
                         throw new Error(`${err.response}`);
@@ -84,11 +90,13 @@ function Registration() {
             console.log(result);
             // toggleLogInPopUp(false);
         } catch (e) {
-            // if(e.response.data.toLowerCase().includes("email")) {
-            //     setEmailError(e.response.data);
-            // } else if(e.response.data.toLowerCase().includes("username")) {
-            //     setUsernameError(e.response.data);
-            // }
+            if(e.response.data.toLowerCase().includes("email")) {
+                setEmailError(e.response.data);
+            } else if(e.response.data.toLowerCase().includes("username")) {
+                setUsernameError(e.response.data);
+            } else {
+                console.log(e);
+            }
         }
     }
 
@@ -97,8 +105,8 @@ function Registration() {
             <form onSubmit={handleSubmit(onFormSubmitRegistration)} id="registration">
                 <div className="new-user-info-username">
                     <label htmlFor={"new-user-username"}>Username</label>
-                    <input type="text" id={"new-user-username"} {...register("username",{required: true})} />
-                    <label className={"error-message"}>{username !== "" ? emailError : ""}</label>
+                    <input type="text" id={"new-user-username"} onInput={(e) => setUsername(e.target.value)} {...register("username",{required: true})} />
+                    <label className={"error-message"}>{username !== "" ? usernameError : ""}</label>
                 </div>
                 <div className="new-user-info-email">
                     <label htmlFor={"new-user-email"}>Email</label>
