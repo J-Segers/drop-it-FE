@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 
@@ -9,58 +9,107 @@ function AuthenticationContextProvider({children}) {
 
     const [auth, setAuth] = useState({
         isAuth: false,
-        user: null,
+        username: "test",
+        roles: [],
     });
-    const history = useNavigate();
 
-    // useEffect(() => {
-    //     if(localStorage.getItem("token")) {
-    //
-    //     } else {
-    //
-    //     }
-    //
-    // }, []);
+    const [profile, setProfile] = useState({
+        age: 0,
+        dob:"1965-01-01",
+        firstName: "test",
+        lastName: "test2",
+        location: "test",
+        story: "test",
+    });
 
-    async function login(token) {
-        console.log(`De gebruiker is ingelogd!`);
-        const decodedJwt = jwtDecode(token);
-        console.log(decodedJwt);
+    useEffect(() => {
+        console.log(auth);
+        console.log(profile);
+    }, [auth,profile]);
 
-        localStorage.setItem("token", token);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
 
+        if(token) {
+             getProfileData(token);
+        } else {
+            setAuth({
+                isAuth: false,
+                username: "",
+                roles: [],
+            });
+        }
+
+    }, []);
+
+    async function getProfileData(token) {
+
+        const decodedToken = jwtDecode(token);
         try {
-            const response = await axios.get(`http://localhost:8080/users?username=${decodedJwt.sub}`, {
+            const response = await axios.get(`http://localhost:8080/profile/${decodedToken.sub}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,}
             })
-            console.log(response)
-            // setAuth({
-            //     isAuth: true,
-            //     user: response.data,
-            // });
+
+            setAuth({
+                isAuth: true,
+                username: decodedToken.sub,
+                roles: [...decodedToken.Authorities],
+            });
+
+            setProfile({
+                ...profile,
+                age: response.data.age,
+                dob: response.data.dob,
+                firstName: response.data.firstName,
+                lastName: response.data.lastName,
+                location: response.data.location,
+                story: response.data.story,
+            });
 
         } catch (e) {
 
-         }
+        }
+    }
 
-        console.log(auth);
+    async function login(token) {
+        console.log(`De gebruiker is ingelogd!`);
 
-        // history.push("/profile");
+        getProfileData(token);
+        // const decodedToken = jwtDecode(token);
+        //
+        // localStorage.setItem("token", token);
+        //
+        // try {
+        //     const response = await axios.get(`http://localhost:8080/profile/${decodedToken.sub}`, {
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             Authorization: `Bearer ${token}`,}
+        //     })
+        //     setAuth({
+        //         isAuth: true,
+        //         username: decodedToken.sub,
+        //         roles: [...decodedToken.Authorities],
+        //     });
+        // } catch (e) {
+        //
+        // }
     }
 
     function logout() {
         console.log(`De gebruiker is uitgelogd!`);
         setAuth({
             isAuth: false,
-            user: null,
+            username: "",
+            roles: [],
         });
-        history.push("/");
+        localStorage.removeItem("token");
     }
 
     const data = {
         auth,
+        profile,
         login,
         logout,
     };

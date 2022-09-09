@@ -17,7 +17,7 @@
 
 #menu-open-container {
     width: 100px;
-    height: 51px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,6 +30,10 @@
     right: 16px;
 }
 
+#menu-open-container > div:last-child {
+    border-top: 1px solid var(--main-color);
+}
+
 #menu-open-container > a {
     width: 100%;
     height: 25px;
@@ -38,4 +42,14 @@
 
 #menu-closed-container > * {
     visibility: hidden;
+}
+
+.btn {
+    width: 100px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Arial", "serif";
+    background-color: white;
 }

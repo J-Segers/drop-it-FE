@@ -2,15 +2,31 @@ import React, {useContext, useEffect, useState} from 'react';
 import "./Info.css";
 import {useForm} from "react-hook-form";
 import defaultImg from "../../../../assets/tenaciousD-JackBlack.jpg";
-import {UserContext} from "../../../../context/UserContextProvider";
+import axios from "axios";
+import {AuthenticationContext} from "../../../../context/AuthenticationContextProvider";
 
 function Info() {
     const {register, handleSubmit} = useForm();
-    const { } = useContext(UserContext);
+    const {auth, profile, setProfile} = useContext(AuthenticationContext);
 
     const [edit, toggleEdit] = useState(false);
     const [infoImage, setInfoImage] = useState(defaultImg);
     const [newImage, setNewImage] = useState(null);
+
+    useEffect(() => {
+        async function getProfile() {
+            console.log(profile);
+            try {
+                const response = await axios.get(`http://localhost:8080/profile/${auth.username}`);
+                console.log(response.data);
+            } catch (e) {
+
+            }
+        }
+        console.log(auth);
+        getProfile();
+
+    },[])
 
     useEffect(() => {
 
@@ -49,7 +65,7 @@ function Info() {
                                 <label>First name: </label>
                                 <input
                                     type={"text"}
-                                    defaultValue={firstName}
+                                    defaultValue={profile.firstName}
                                     {...register("firstName")}
                                 />
                             </div>
@@ -57,7 +73,7 @@ function Info() {
                                 <label>Last name: </label>
                                 <input
                                     type={"text"}
-                                    defaultValue={lastName}
+                                    defaultValue={profile.lastName}
                                     {...register("lastName")}
                                 />
                             </div>
@@ -65,7 +81,7 @@ function Info() {
                                 <label>Location: </label>
                                 <input
                                     type={"text"}
-                                    defaultValue={userLocation}
+                                    defaultValue={profile.location}
                                     {...register("location")}
                                 />
                             </div>
@@ -74,7 +90,7 @@ function Info() {
                                 <textarea
                                     cols={60}
                                     rows={23}
-                                    defaultValue={aboutMe}
+                                    defaultValue={profile.story}
                                  {...register("story")}
                                 />
                             </div>
@@ -97,19 +113,19 @@ function Info() {
                         <form id={"profile-info"}>
                             <div className={"info-item"}>
                                 <label>First name: </label>
-                                <label>{firstName}</label>
+                                <label>{profile.firstName}</label>
                             </div>
                             <div className={"info-item"}>
                                 <label>Last name: </label>
-                                <label>{lastName}</label>
+                                <label>{profile.lastName}</label>
                             </div>
                             <div className={"info-item"}>
                                 <label>Location: </label>
-                                <label>{userLocation}</label>
+                                <label>{profile.location}</label>
                             </div>
                             <div className={"info-item"}>
                                 <label>About me: </label>
-                                <p>{aboutMe}</p>
+                                <p>{profile.story}</p>
                             </div>
                         </form>
                     <div id={"info-image"}>

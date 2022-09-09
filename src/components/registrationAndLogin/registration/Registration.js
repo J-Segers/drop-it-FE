@@ -80,7 +80,7 @@ function Registration() {
     async function onFormSubmitRegistration(data) {
         const BAD_REQUEST = 400;
         try {
-            const result = await axios.post(`http://localhost:8080/users`, data).catch(err => {
+            const result = await axios.post(`http://localhost:8080/users/new`, data).catch(err => {
                 console.log(err);
                     if(err.status === BAD_REQUEST){
                         throw new Error(`${err.response}`);

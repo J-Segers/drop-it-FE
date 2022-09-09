@@ -2,15 +2,15 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import "./UserMenu.css";
 import defaultProfile from "../../../../assets/profile-default.png";
 import userProfileImg from "../../../../assets/JackBlack.jpg";
-import Btn from "../../../globalComponents/btn/Btn";
 import {NavLink} from "react-router-dom";
 import {PopUpContext} from "../../../../context/PopupProvider";
+import {AuthenticationContext} from "../../../../context/AuthenticationContextProvider";
 
 function UserMenu() {
-    const {toggleLogInPopUp, landingLogin, handlePopUpLanding} = useContext(PopUpContext);
+    const {toggleLogInPopUp, handlePopUpLanding} = useContext(PopUpContext);
 
     const [menuState, setMenuState] = useState(false);
-    const [loggedIn, toggleLoggedIn] = useState(true); //will be changed to context
+    const {auth, logout} = useContext(AuthenticationContext);
     const btnRef = useRef();
 
     useEffect(() => {
@@ -27,18 +27,21 @@ function UserMenu() {
 
     return (
         <div ref={btnRef} id={"user-menu-container"} onClick={() => {setMenuState(menuState => !menuState)}}>
-            {loggedIn ? <img src={userProfileImg} alt={""} /> : <img src={defaultProfile} alt={""}/> }
+            {auth.isAuth ? <img src={userProfileImg} alt={""} /> : <img src={defaultProfile} alt={""}/> }
             <div  className={menuState ? "user-menu-open" : "user-menu-closed"} />
             <div id={`menu-${menuState ? "open" : "closed"}-container`}>
-                <NavLink to={"/profile/info"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                    <Btn text={"profile"} />
-                </NavLink>
-                {/*button will eventually toggle between login and log out*/}
-                <div onClick={() => {
-                    handlePopUpLanding(true);
-                    toggleLogInPopUp(true)
+                {auth.isAuth && <div className={"btn"}>
+                    <NavLink to={"profile/info"}>profile</NavLink>
+                </div>}
+                <div className={"btn"} onClick={() => {
+                    if(!auth.isAuth){
+                        handlePopUpLanding(true);
+                        toggleLogInPopUp(true);
+                    } else {
+                        logout();
+                    }
                 }}>
-                    <Btn text={"log in"} />
+                    {auth.isAuth ? <div className={"btn"}>logout</div> : <NavLink to={"profile/info"}>login</NavLink>}
                 </div>
             </div>
         </div>

@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from 'react';
 import "./Profile.css";
 import {MusicPlayerContext} from "../../context/MusicPlayerProvider";
-import {NavLink, Outlet} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import profileImage from "../../assets/JackBlack.jpg";
 import Btn from "../../components/globalComponents/btn/Btn";
+import {AuthenticationContext} from "../../context/AuthenticationContextProvider";
 
 function Profile() {
     const {togglePlayer} = useContext(MusicPlayerContext);
+    const {auth} = useContext(AuthenticationContext);
     useEffect(() => {
         togglePlayer(false);
     })
@@ -18,15 +20,9 @@ function Profile() {
                     <img src={profileImage} alt="User profile picture"/>
                 </div>
                 <div id={"profile-menu"}>
-                    <NavLink to={"info"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                        <Btn text={"info"}/>
-                    </NavLink>
-                    <NavLink to={"songs"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                        <Btn text={"songs"} />
-                    </NavLink>
-                    <NavLink to={"stats"} className={"inActiveClass"} activeClassName={"activeClass"}>
-                        <Btn text={"stats"} />
-                    </NavLink>
+                        <Btn text={"info"} route={"info"} />
+                        <Btn text={"songs"} route={"songs"} />
+                    {auth.isAuth && auth.roles.includes("ROLE_ARTIST") && <Btn text={"stats"} route={"stats"} />}
                 </div>
             </div>
             <div id={"profile-body"}>

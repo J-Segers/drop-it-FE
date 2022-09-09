@@ -33,7 +33,7 @@
 }
 
 #profile-menu {
-    width: 302px;
+    width: auto;
     height: 25px;
     display: flex;
     justify-content: space-between;
@@ -41,6 +41,14 @@
     background: var(--main-color);
     border: 2px solid var(--main-color);
     border-bottom: 1px solid var(--main-color);
+}
+
+#profile-menu > *:first-child {
+    border-right: 1px solid var(--main-color);
+}
+
+#profile-menu > *:last-child {
+    border-left: 1px solid var(--main-color);
 }
 
 #profile-body {

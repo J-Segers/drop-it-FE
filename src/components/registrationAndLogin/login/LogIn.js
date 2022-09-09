@@ -2,14 +2,15 @@ import React, {useContext, useEffect, useState} from 'react';
 import "./LogIn.css";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import {UserContext} from "../../../context/UserContextProvider";
 import {AuthenticationContext} from "../../../context/AuthenticationContextProvider";
+import {PopUpContext} from "../../../context/PopupProvider";
 
 function LogIn() {
 
     const [errorMessage, setErrorMessage] = useState("");
 
     const {login} = useContext(AuthenticationContext);
+    const {toggleLogInPopUp} = useContext(PopUpContext);
 
     const {register, handleSubmit} = useForm() ;
 
@@ -26,6 +27,7 @@ function LogIn() {
             if(errorMessage !== "") {
                 setErrorMessage("");
             }
+            toggleLogInPopUp(false);
         } catch (e) {
             if(e.response.status === 403){
                 setErrorMessage("Wrong username or password!");
