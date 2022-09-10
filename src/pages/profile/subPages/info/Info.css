@@ -60,32 +60,27 @@
 }
 
 #edit-info-container {
-    width: 100%;
+    width: 1200px;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#edit-profile-info {
-    width: 100%;
-    height: calc(100% - 16px);
     display: grid;
-    grid-template-rows: 5% 40% 40% 5%;
+    grid-template-rows: 5% 30% 40% 5%;
     grid-template-columns: 5% 40% 5% 40% 5%;
     grid-template-areas:
             ". . . . close"
-            ". items . editPhoto ."
-            ". items . editPhoto ."
-            ". . . . save"
-    ;
+            ". items . profile-img ."
+            ". items . body-img ."
+            ". . . . ."
+;
     gap: 8px;
     margin-top: 16px;
 }
 
-#items {
+#edit-profile-info {
     grid-area: items;
+
 }
+
+
 
 .edit-info-item {
     width: 550px;
@@ -97,17 +92,33 @@
     margin: 8px;
 }
 
-#edit-info-image {
-    width: 550px;
+#edit-info-profile-image {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    grid-area: editPhoto;
+    grid-area: profile-img;
 }
 
-#edit-info-image > img {
-    width: 50%;
+#edit-info-profile-image > img {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+#edit-info-body-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: body-img;
+}
+
+#edit-info-body-image > img {
+    object-fit: contain;
+    width: 450px;
+    height: 230px;
 }
 
 #profile-save-btn {

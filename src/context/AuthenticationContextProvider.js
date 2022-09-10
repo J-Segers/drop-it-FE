@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import defaultImg from "../assets/profile-default.png";
 
 export const AuthenticationContext = createContext(null);
 
@@ -9,23 +9,14 @@ function AuthenticationContextProvider({children}) {
 
     const [auth, setAuth] = useState({
         isAuth: false,
-        username: "test",
-        roles: [],
-    });
-
-    const [profile, setProfile] = useState({
-        age: 0,
-        dob:"1965-01-01",
-        firstName: "test",
-        lastName: "test2",
-        location: "test",
-        story: "test",
+        user: {
+            profile: null,
+        }
     });
 
     useEffect(() => {
         console.log(auth);
-        console.log(profile);
-    }, [auth,profile]);
+    }, [auth]);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -35,12 +26,27 @@ function AuthenticationContextProvider({children}) {
         } else {
             setAuth({
                 isAuth: false,
-                username: "",
-                roles: [],
+                user: {
+                    profile: null,
+                }
             });
         }
 
     }, []);
+
+    function changeProfileImg(profile) {
+        console.log(profile)
+        console.log(auth);
+        setAuth({
+            ...auth,
+            user: {
+                ...auth.user,
+                profile,
+                }
+            }
+
+        );
+    }
 
     async function getProfileData(token) {
 
@@ -54,18 +60,12 @@ function AuthenticationContextProvider({children}) {
 
             setAuth({
                 isAuth: true,
-                username: decodedToken.sub,
-                roles: [...decodedToken.Authorities],
-            });
-
-            setProfile({
-                ...profile,
-                age: response.data.age,
-                dob: response.data.dob,
-                firstName: response.data.firstName,
-                lastName: response.data.lastName,
-                location: response.data.location,
-                story: response.data.story,
+                user: {
+                    username: decodedToken.sub,
+                    email: decodedToken.iss,
+                    roles: [...decodedToken.Authorities],
+                    profile: {...response.data},
+                }
             });
 
         } catch (e) {
@@ -77,41 +77,26 @@ function AuthenticationContextProvider({children}) {
         console.log(`De gebruiker is ingelogd!`);
 
         getProfileData(token);
-        // const decodedToken = jwtDecode(token);
-        //
-        // localStorage.setItem("token", token);
-        //
-        // try {
-        //     const response = await axios.get(`http://localhost:8080/profile/${decodedToken.sub}`, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             Authorization: `Bearer ${token}`,}
-        //     })
-        //     setAuth({
-        //         isAuth: true,
-        //         username: decodedToken.sub,
-        //         roles: [...decodedToken.Authorities],
-        //     });
-        // } catch (e) {
-        //
-        // }
     }
 
     function logout() {
         console.log(`De gebruiker is uitgelogd!`);
         setAuth({
             isAuth: false,
-            username: "",
-            roles: [],
+            user: {
+                profile: null,
+            }
         });
         localStorage.removeItem("token");
     }
 
     const data = {
         auth,
-        profile,
+        user: auth.user,
+        profile: auth.user.profile,
         login,
         logout,
+        changeProfileImg
     };
 
     return (

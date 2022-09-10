@@ -80,7 +80,18 @@ function Upload() {
                            accept={"image/jpeg, image/png"}
                            id={"initial-song-cover"}
                            onInput={handlePreviewChange}
-                           {...register("file", {required: true})}
+                           {...register("img_file", {required: true})}
+                    />
+                    {preview ? <img src={`${preview}`} alt="" /> : null}
+                </fieldset>
+
+                <fieldset id={"upload-song-file"}>
+                    <legend>mp3</legend>
+                    <input type="file"
+                           accept={"audio/mp3"}
+                           id={"initial-song-cover"}
+                           onInput={handlePreviewChange}
+                           {...register("mp3_file", {required: true})}
                     />
                     {preview ? <img src={`${preview}`} alt="" /> : null}
                 </fieldset>

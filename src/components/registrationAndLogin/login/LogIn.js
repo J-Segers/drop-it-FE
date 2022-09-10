@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "./LogIn.css";
 import {useForm} from "react-hook-form";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AuthenticationContext} from "../../../context/AuthenticationContextProvider";
 import {PopUpContext} from "../../../context/PopupProvider";
@@ -13,6 +14,8 @@ function LogIn() {
     const {toggleLogInPopUp} = useContext(PopUpContext);
 
     const {register, handleSubmit} = useForm() ;
+    const history = useNavigate();
+    const location = useLocation();
 
     async function onLoginRequest(data) {
         console.log(data)
@@ -23,6 +26,8 @@ function LogIn() {
             localStorage.setItem("token", response.data);
 
             login(response.data);
+
+            history(location);
 
             if(errorMessage !== "") {
                 setErrorMessage("");

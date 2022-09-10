@@ -33,8 +33,9 @@
     height: calc(100% - 16px);
     display: grid;
     grid-template-columns: 16px 310px 148px 148px 16px;
-    grid-template-rows: 40% 40% 10%;
+    grid-template-rows: 40%  10% 30% 10%;
     grid-template-areas: ". info cover cover ."
+                         ". song song song ."
                          ". story story story ."
                          ". . . submit .";
     gap: 16px;
@@ -66,6 +67,13 @@
     justify-content: center;
     align-items: center;
     grid-area: story;
+}
+
+#upload-song-file {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: song;
 }
 
 #upload-song-submit {
