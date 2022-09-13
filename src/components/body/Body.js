@@ -14,8 +14,8 @@ function Body() {
         <div id={isLargePlayer ? "page-body-small" : "page-body-large"}>
             <Routes history={"test"}>
                 <Route exact path={"/"} element={<Home />} />
-                <Route path={"/profile/*"} element={<Profile />}>
-                    <Route path={"info/:username"} element={<Info />} />
+                <Route path={"/profile/:username/*"} element={<Profile />}>
+                    <Route path={"info"} element={<Info />} />
                     <Route path={"songs"} element={<SongBook />} />
                     <Route path={"stats"} element={<Stats />} />
                 </Route>

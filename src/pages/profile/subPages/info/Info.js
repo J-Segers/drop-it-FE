@@ -1,10 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import "./Info.css";
 import {useForm} from "react-hook-form";
-import defaultImg from "../../../../assets/tenaciousD-JackBlack.jpg";
+import defaultProfileImg from "../../../../assets/Portrait_Placeholder.png";
+import defaultProfileBodyImg from "../../../../assets/placeholder-image.png";
 import axios from "axios";
 import {AuthenticationContext} from "../../../../context/AuthenticationContextProvider";
-import {useParams} from "react-router-dom";
+import {useParams, useOutletContext} from "react-router-dom";
 
 function Info() {
     const {register, handleSubmit} = useForm();
@@ -12,36 +13,16 @@ function Info() {
     const {register: profileImgRegister, handleSubmit: handleProfileImgSubmit} = useForm();
     const {auth, user, profile, changeProfileImg} = useContext(AuthenticationContext);
 
-    const [profileInfo, setProfileInfo] = useState({});
+    const [profileInfo, setProfileInfo] = useOutletContext();
     const [edit, toggleEdit] = useState(false);
-    const [previewBodyImage, setPreviewBodyImage] = useState(defaultImg);
-    const [previewImage, setPreviewImage] = useState(defaultImg);
+    const [previewBodyImage, setPreviewBodyImage] = useState(defaultProfileBodyImg);
+    const [previewImage, setPreviewImage] = useState(defaultProfileImg);
 
     const {username} = useParams();
 
-    useEffect(() => {
-        console.log(profileInfo);
-        console.log(auth);
-    }, [profileInfo, auth]);
-
-    useEffect(() => {
-        async function getProfile() {
-            try {
-                const response = await axios.get(`http://localhost:8080/profile/${username}`);
-                setProfileInfo(response.data);
-                console.log(response.data)
-            } catch (e) {
-
-            }
-        }
-
-        getProfile();
-
-    }, [username]);
-
     const handleImageChange = (e) => {
         const newFile = e.target.files[0];
-        console.log(e.target.name);
+
         if(e.target.name === "profileImg") {
             setPreviewImage(URL.createObjectURL(newFile));
         } else if(e.target.name === "profileBodyImg") {
@@ -69,6 +50,30 @@ function Info() {
 
     }
 
+    async function onProfileImgSubmit(data) {
+        console.log(data)
+        const formData = new FormData();
+        formData.append("file", data.profileImg[0]);
+        console.log("formdata: ", Object.fromEntries(formData));
+
+        try {
+            const response = await axios.post(`http://localhost:8080/upload/profileImg/${user.username}`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                })
+            setProfileInfo(
+                {...profileInfo,
+                    profileImg: {...response.data}
+                });
+        } catch (e) {
+
+        }
+    }
+
     async function onBodyImgSubmit(data) {
 
         const formData = new FormData();
@@ -93,29 +98,7 @@ function Info() {
 
         }
     }
-    async function onProfileImgSubmit(data) {
-        console.log(data)
-        const formData = new FormData();
-        formData.append("file", data.profileImg[0]);
-        console.log("formdata: ", Object.fromEntries(formData));
 
-        try {
-            const response = await axios.post(`http://localhost:8080/upload/profileImg/${user.username}`,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    },
-                })
-            setProfileInfo(
-                {...profileInfo,
-                        profileImg: {...response.data}
-                    });
-        } catch (e) {
-
-        }
-    }
 
     return (
         <>{profileInfo && <>
@@ -214,7 +197,7 @@ function Info() {
                         </div>
                     </form>
                         <div id={"info-image"}>
-                            <img src={profile.profileBodyImg ? `${profile.profileBodyImg.url}` : defaultImg} alt={""}/>
+                            <img src={profile && profile.profileBodyImg ? `${profile.profileBodyImg.url}` : defaultProfileBodyImg} alt={""}/>
                         </div>
                 </div>
             }

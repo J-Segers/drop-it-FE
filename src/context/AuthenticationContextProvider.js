@@ -23,6 +23,7 @@ function AuthenticationContextProvider({children}) {
 
         if(token) {
              getProfileData(token);
+             console.log(auth.profile);
         } else {
             setAuth({
                 isAuth: false,
@@ -34,7 +35,7 @@ function AuthenticationContextProvider({children}) {
 
     }, []);
 
-    function changeProfileImg(profile) {
+    function localUpdateProfileImg(profile) {
         console.log(profile)
         console.log(auth);
         setAuth({
@@ -96,7 +97,7 @@ function AuthenticationContextProvider({children}) {
         profile: auth.user.profile,
         login,
         logout,
-        changeProfileImg
+        changeProfileImg: localUpdateProfileImg
     };
 
     return (

@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import "./UserMenu.css";
-import defaultProfile from "../../../../assets/profile-default.png";
-import userProfileImg from "../../../../assets/JackBlack.jpg";
+import defaultProfile from "../../../../assets/Portrait_Placeholder.png";
 import {NavLink} from "react-router-dom";
 import {PopUpContext} from "../../../../context/PopupProvider";
 import {AuthenticationContext} from "../../../../context/AuthenticationContextProvider";
@@ -10,7 +9,7 @@ function UserMenu() {
     const {toggleLogInPopUp, handlePopUpLanding} = useContext(PopUpContext);
 
     const [menuState, setMenuState] = useState(false);
-    const {auth, logout} = useContext(AuthenticationContext);
+    const {auth, profile, logout} = useContext(AuthenticationContext);
     const btnRef = useRef();
 
     useEffect(() => {
@@ -27,12 +26,12 @@ function UserMenu() {
 
     return (
         <div ref={btnRef} id={"user-menu-container"} onClick={() => {setMenuState(menuState => !menuState)}}>
-            {auth.isAuth ? <img src={userProfileImg} alt={""} /> : <img src={defaultProfile} alt={""}/> }
+            <img src={profile && profile.profileImg ? `${profile.profileImg.url}` : defaultProfile} alt={""}/>
             <div  className={menuState ? "user-menu-open" : "user-menu-closed"} />
             <div id={`menu-${menuState ? "open" : "closed"}-container`}>
-                {auth.isAuth && <div className={"btn"}>
-                    <NavLink to={`profile/info/${auth.user.username}`}>profile</NavLink>
-                </div>}
+                {auth.isAuth &&
+                    <NavLink to={`profile/${auth.user.username}/info`}><div className={"btn"}>profile</div></NavLink>
+                }
                 <div className={"btn"} onClick={() => {
                     if(!auth.isAuth){
                         handlePopUpLanding(true);

@@ -30,9 +30,15 @@ function PopupProvider({children}) {
             toggleLandingLogin(true);
         }
     }
+    const data = {popUpUploadVisible,
+        toggleUploadPopUp,
+        popUpLogInVisible,
+        toggleLogInPopUp,
+        landingLogin,
+        handlePopUpLanding};
 
     return (
-        <PopUpContext.Provider value={{popUpUploadVisible, toggleUploadPopUp, popUpLogInVisible, toggleLogInPopUp, landingLogin, handlePopUpLanding}}>
+        <PopUpContext.Provider value={data}>
             {children}
         </PopUpContext.Provider>
     );

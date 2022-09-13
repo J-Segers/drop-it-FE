@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "./Display.css";
+import {MusicPlayerContext} from "../../../../context/MusicPlayerProvider";
 
-function Display() {
+function Display({Song}) {
+
     const currentSong = "greatest song ever played";
     const currentArtist = "Tenacious D";
     return (

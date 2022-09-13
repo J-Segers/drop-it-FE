@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./SongItem.css";
 
-function SongItem({songInfo}) {
+function SongItem({song}) {
+
+    useEffect(() => {
+        console.log(song);
+    })
+
     return (
         <div className={"song-item"}>
-            <div id={"photo"}>{songInfo[0]}</div> {/*will be replaced by an image*/}
-            <label title={"title"}>{songInfo[1]}</label>
-            <label title={"artist"}>{songInfo[2]}</label>
-            <label title={"length"}>{songInfo[3]}</label>
+            <img id={"photo"} src={song.songImg.url} alt={""}/>
+            <label title={"title"}>{song.songTitle}</label>
+            <label title={"artist"}>{song.songArtist}</label>
+            <label title={"length"}>{song.songLength}</label>
         </div>
     );
 }

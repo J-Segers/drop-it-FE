@@ -1,11 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./PlayBtn.css";
+import {MusicPlayerContext} from "../../../../../../../context/MusicPlayerProvider";
 
 function PlayBtn() {
-    const [isPlaying, toggleIsPlaying] = useState(false);
+    const {isPlaying, startPlaying} = useContext(MusicPlayerContext);
+    const [paused, togglePaused] = useState(false);
+
+    useEffect(() => {
+        console.log(isPlaying);
+    }, [isPlaying]);
+
     return (
-        <div className={"play-btn-container"} onClick={() => toggleIsPlaying(!isPlaying)}>
-            <div className={isPlaying ? "play-btn-playing" : "play-btn-paused"} />
+        <div className={"play-btn-container"} onClick={() => {
+            startPlaying();
+            togglePaused(!paused)
+        }} >
+            <div className={paused ? "play-btn-playing" : "play-btn-paused"} onClick={() => startPlaying()} />
         </div>
     );
 }

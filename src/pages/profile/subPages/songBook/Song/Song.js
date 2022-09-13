@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Song.css";
-import songImg from "../../../../../assets/JackBlack.jpg";
 
 function Song({song}) {
+
     return (
         <div className={"song-container"}>
             <div className={"song-img-container"}>
-                <img src={songImg} alt="" />
+                <img src={song.songImg.url} alt="" />
             </div>
             <span>
-                <label title={"title"}>{song[0]}</label>
-                <label title={"genre"}>{song[4]}</label>
+                <label title={"title"}>{song.songTitle}</label>
+                <label title={"genre"}>{song.songGenre}</label>
             </span>
         </div>
     );

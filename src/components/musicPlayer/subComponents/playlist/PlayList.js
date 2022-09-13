@@ -1,36 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import "./PlayList.css";
 import SongItem from "./songItem/SongItem";
+import {MusicPlayerContext} from "../../../../context/MusicPlayerProvider";
 
 function PlayList() {
     //just for testing, will be removed
-    const playerSongList = [["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"],
-        ["test", "title", "artist", "length"]];
+    const {playList} = useContext(MusicPlayerContext);
 
     return (
         <div className={"playlist"}>
-            {playerSongList.map((song) => {
-                return <SongItem songInfo={song} />
+            {playList.map((song) => {
+                return <SongItem song={song} />
             })}
         </div>
     );
