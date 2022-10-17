@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import "./Song.css";
+import convertMsToMinAndSec from "../../../../../helperFuncties/convertLengthToTime";
 
 function Song({song}) {
 
     return (
         <div className={"song-container"}>
             <div className={"song-img-container"}>
-                <img src={song.songImg.url} alt="" />
+                <img src={Object.keys(song).length > 0 ? song.songImg.url : ""} alt="" />
             </div>
             <span>
-                <label title={"title"}>{song.songTitle}</label>
-                <label title={"genre"}>{song.songGenre}</label>
+                <label title={"title"}>{`title: ${song.title}`}</label>
+                <label title={"genre"}>{`genre: ${song.genre}`}</label>
+                <label title={"length"}>{`length: ${convertMsToMinAndSec(song.length)}`}</label>
             </span>
         </div>
     );

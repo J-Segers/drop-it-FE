@@ -26,7 +26,7 @@ function UserMenu() {
 
     return (
         <div ref={btnRef} id={"user-menu-container"} onClick={() => {setMenuState(menuState => !menuState)}}>
-            <img src={profile && profile.profileImg ? `${profile.profileImg.url}` : defaultProfile} alt={""}/>
+            <img src={auth.isAuth && profile && profile.profileImg ? `${profile.profileImg.url}` : defaultProfile} alt={""}/>
             <div  className={menuState ? "user-menu-open" : "user-menu-closed"} />
             <div id={`menu-${menuState ? "open" : "closed"}-container`}>
                 {auth.isAuth &&

@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useEffect, useRef, useState} from 'react';
 import axios from "axios";
 
 export const MusicPlayerContext = createContext(null);
@@ -6,66 +6,52 @@ export const MusicPlayerContext = createContext(null);
 function MusicPlayerProvider({children}) {
     const [isLargePlayer, toggleIsLargePlayer] = useState(true);
     const [playList, setPlaylist] = useState([]);
-    const [currentSong, setCurrentSong] = useState("");
+    const [currentSong, setCurrentSong] = useState({});
     const [isPlaying, toggleIsPlaying] = useState(false);
     const [songIndex, setSongIndex] = useState(0);
+
+    const audioElement = useRef();
 
     useEffect(() => {
         fetchPlaylist();
     }, []);
 
     useEffect(() => {
-        if(currentSong === "") {
-            setCurrentSong(playList[0]);
+        console.log(currentSong)
+    }, [currentSong])
+
+    useEffect(() => {
+        if(isPlaying) {
+            audioElement.current.play();
+        } else {
+            audioElement.current.pause();
         }
-    }, [playList])
+    },[isPlaying])
 
 
-
-    async function fetchPlaylist(){
+    async function fetchPlaylist() {
         try {
             const response = await axios.get("http://localhost:8080/allsongs");
-            console.log(response.data)
+            console.log("response", response.data)
+            console.log("response", response.data[0])
+
             setPlaylist(response.data);
+            setCurrentSong(response.data[0]);
         } catch (e) {
 
         }
     }
 
-    function togglePlayer(newValue) {
-        if(isLargePlayer === true && newValue === false) {
-            toggleIsLargePlayer(false);
-        } else if(isLargePlayer === false && newValue === true) {
-            toggleIsLargePlayer(true);
-        }
-    }
-
-    // function updatePlayList(newList) {
-    //     if(!newList.isEmpty && playList.isEmpty) {
-    //         console.log(newList);
-    //         setPlaylist(newList);
-    //         setCurrentSong(playList[0]);
-    //     }
-    // }
-
-    function startPlaying() {
-        if(isPlaying) {
-            toggleIsPlaying(false);
-        } else {
-            toggleIsPlaying(true);
-            fetchPlaylist();
-        }
-
-    }
-
     const data = {
         isLargePlayer,
-        togglePlayer,
+        toggleIsLargePlayer,
         playList,
         // updatePlayList,
         currentSong,
         setCurrentSong,
-        startPlaying
+        isPlaying,
+        toggleIsPlaying,
+        audioElement
     }
 
     return (

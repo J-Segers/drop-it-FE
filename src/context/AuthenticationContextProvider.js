@@ -15,7 +15,6 @@ function AuthenticationContextProvider({children}) {
     });
 
     useEffect(() => {
-        console.log(auth);
     }, [auth]);
 
     useEffect(() => {
@@ -23,7 +22,6 @@ function AuthenticationContextProvider({children}) {
 
         if(token) {
              getProfileData(token);
-             console.log(auth.profile);
         } else {
             setAuth({
                 isAuth: false,
@@ -36,8 +34,6 @@ function AuthenticationContextProvider({children}) {
     }, []);
 
     function localUpdateProfileImg(profile) {
-        console.log(profile)
-        console.log(auth);
         setAuth({
             ...auth,
             user: {

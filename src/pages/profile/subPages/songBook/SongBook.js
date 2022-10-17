@@ -36,8 +36,9 @@ function Songs() {
                 <h3>add new song</h3>
             </div>
             {popUpUploadVisible ? <Upload /> : ""}
-            {artistSongs.map((songInfo) => {
-            return <Song key={songInfo.songId} song={songInfo}/>;
+            {artistSongs.map((song) => {
+                console.log(song);
+            return <Song key={song.id} song={song}/>;
         })}
         </div>
     );

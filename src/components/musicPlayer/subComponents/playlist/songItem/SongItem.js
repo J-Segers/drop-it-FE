@@ -9,10 +9,10 @@ function SongItem({song}) {
 
     return (
         <div className={"song-item"}>
-            <img id={"photo"} src={song.songImg.url} alt={""}/>
-            <label title={"title"}>{song.songTitle}</label>
-            <label title={"artist"}>{song.songArtist}</label>
-            <label title={"length"}>{song.songLength}</label>
+            <img id={"photo"} src={song.songImg.url !== '' ? song.songImg.url : ''} alt={""}/>
+            <label title={"title"}>{song.title}</label>
+            <label title={"artist"}>{song.artist}</label>
+            <label title={"length"}>{song.length}</label>
         </div>
     );
 }

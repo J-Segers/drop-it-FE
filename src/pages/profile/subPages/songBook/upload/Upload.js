@@ -86,8 +86,8 @@ function Upload() {
                 })
             console.log("responseData: ", response.data);
             setSongInfo(response.data);
-            setCover(response.data.songId);
-            setSong(response.data.songId);
+            setCover(response.data.id);
+            setSong(response.data.id);
         } catch (e) {
             console.error(e);
         }
@@ -111,13 +111,13 @@ function Upload() {
                             {...register("songTitle", {required: true})}
                         />
                     </div>
-                    <div className={"item"}>
-                        <label htmlFor="song-length">Length:</label>
-                        <input
-                            type="text"
-                            {...register("songLength", {required: true})}
-                        />
-                    </div>
+                    {/*<div className={"item"}>*/}
+                    {/*    <label htmlFor="song-length">Length:</label>*/}
+                    {/*    <input*/}
+                    {/*        type="text"*/}
+                    {/*        {...register("songLength", {required: true})}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
                     <div className={"item"}>
                         <label htmlFor="song-artist">Artist:</label>
                         <input

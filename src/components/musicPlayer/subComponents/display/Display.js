@@ -1,18 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./Display.css";
 import {MusicPlayerContext} from "../../../../context/MusicPlayerProvider";
 
-function Display({Song}) {
+function Display({song}) {
 
-    const currentSong = "greatest song ever played";
-    const currentArtist = "Tenacious D";
+    const {isPlaying} = useContext(MusicPlayerContext);
+    const [currentSongInfo, setCurrentSongInfo] = useState("");
+
+    let min = 3;
+    let sec = 8;
+
+    // useEffect(() => {
+    //     setCurrentSongInfo(`${song.title} - ${song.artist}`);
+    // }, [song])
+
     return (
         <div id={"display"}>
-            <div className={"song-info"}>
-                <label title={"current-song-name"}>{currentSong}</label>
-                <label title={"current-artist-name"}>{currentArtist}</label>
-            </div>
-            <label title={"timestamp"}>2:02 / 4:23</label>
+            <label id={"current-song-info"} title={"current-song-info"}>{isPlaying && currentSongInfo}</label>
+            <input type={"range"} id={"current-song-slider"} max={100} value={0}/>
+            <label id={"current-song-timestamp"} title={"current-song-timestamp"}>{sec < 10 ? `0:00 / ${min}:0${sec}` : `0:00 / ${min}:${sec}`}</label>
         </div>
     );
 }

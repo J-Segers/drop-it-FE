@@ -40,7 +40,7 @@ function Stats() {
             <h2>Channel Statistics</h2>
             <div className={"chart"}>
                 <Chart
-                chartType={"LineChart"}
+                chartType={"PieChart"}
                 data={data}
                 options={options}
                 width="400px"

@@ -5,11 +5,11 @@ import Schedule from "../../components/globalComponents/schedule/Schedule";
 import {PopUpContext} from "../../context/PopupProvider";
 
 function Home() {
-    const {togglePlayer} = useContext(MusicPlayerContext);
+    const {toggleIsLargePlayer} = useContext(MusicPlayerContext);
     const {toggleLogInPopUp, handlePopUpLanding} = useContext(PopUpContext);
 
     useEffect(() => {
-        togglePlayer(true);
+        toggleIsLargePlayer(true);
     },[]);
 
     return (

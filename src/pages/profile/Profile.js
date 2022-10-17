@@ -8,14 +8,14 @@ import {AuthenticationContext} from "../../context/AuthenticationContextProvider
 import axios from "axios";
 
 function Profile() {
-    const {togglePlayer} = useContext(MusicPlayerContext);
+    const {toggleIsLargePlayer} = useContext(MusicPlayerContext);
     const {auth, user, profile} = useContext(AuthenticationContext);
     const [profileInfo, setProfileInfo] = useState({});
     const {username} = useParams();
 
     useEffect(() => {
-        togglePlayer(false);
-    },[togglePlayer])
+        toggleIsLargePlayer(false);
+    },[])
 
     useEffect(() => {
         async function getProfile() {

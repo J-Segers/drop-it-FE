@@ -9,8 +9,8 @@ function PlayList() {
 
     return (
         <div className={"playlist"}>
-            {playList.map((song) => {
-                return <SongItem song={song} />
+            {playList.length > 0 && playList.map((song) => {
+                return <SongItem key={song.id} song={song} />
             })}
         </div>
     );
