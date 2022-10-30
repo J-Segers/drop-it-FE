@@ -197,7 +197,7 @@ function Info() {
                         </div>
                     </form>
                         <div id={"info-image"}>
-                            <img src={profile && profile.profileBodyImg ? `${profile.profileBodyImg.url}` : defaultProfileBodyImg} alt={""}/>
+                            <img src={profileInfo && profileInfo.profileBodyImg ? `${profileInfo.profileBodyImg.url}` : defaultProfileBodyImg} alt={""}/>
                         </div>
                 </div>
             }
