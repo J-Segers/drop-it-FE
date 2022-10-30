@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import "./Upload.css";
 import {PopUpContext} from "../../../../../context/PopupProvider";
 import {useForm} from 'react-hook-form';
@@ -13,10 +13,13 @@ function Upload() {
     const [preview, setPreview] = useState(null);
     const [songInfo, setSongInfo] = useState({});
 
+    const previewPlayer = useRef();
+
     useEffect(() => {
         console.log(songCover)
         console.log(songFile)
         console.log(songInfo)
+        console.log(previewPlayer);
     },[preview, songCover, songFile, songInfo]);
 
     function handleClosePopUp() {
@@ -24,12 +27,13 @@ function Upload() {
     }
 
     function handleChange(e) {
+        console.log(e);
         const file = e.target.files[0];
         if(e.target.name === "cover"){
             setPreview(URL.createObjectURL(file));
             setSongCover(file);
         } else if(e.target.name === "songFile"){
-            setSongFile(file);
+            setSongFile(URL.createObjectURL(file));
         }
 
     }
@@ -108,6 +112,7 @@ function Upload() {
                         <input
                             name={"upload-song-title"}
                             type="text"
+                            // value={previewPlayer.current.duration}
                             {...register("songTitle", {required: true})}
                         />
                     </div>
@@ -161,6 +166,7 @@ function Upload() {
                            id={"initial-song-cover"}
                            onChange={handleChange}
                     />
+                    <audio src={songFile} controls ref={previewPlayer}/>
                 </fieldset>
 
                 <fieldset id={"upload-song-story"}>

@@ -11,6 +11,7 @@
             ". . . .";
     background-color: var(--displayColor);
     border-radius: 8px;
+    color: white;
 }
 
 #current-song-info {

@@ -7,7 +7,7 @@ import {MusicPlayerContext} from "../../../../context/MusicPlayerProvider";
 
 function ControlPanel() {
 
-    const {currentSong, isPlaying} =useContext(MusicPlayerContext);
+    const {currentSong} =useContext(MusicPlayerContext);
     // let isFilled= Object.keys(currentSong).length > 0;
 
     useEffect(() => {
@@ -16,7 +16,6 @@ function ControlPanel() {
 
     return (
         <div id={"control-panel"}>
-            <audio src={ Object.keys(currentSong).length > 0 ? currentSong.song.url: ''} preload={"metadata"} loop />
             <Controls />
             <Display songInfo={currentSong} />
             <div className={"likes"}>

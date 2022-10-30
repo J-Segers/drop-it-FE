@@ -8,13 +8,17 @@ function MusicPlayerProvider({children}) {
     const [playList, setPlaylist] = useState([]);
     const [currentSong, setCurrentSong] = useState({});
     const [isPlaying, toggleIsPlaying] = useState(false);
-    const [songIndex, setSongIndex] = useState(0);
+    const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
     const audioElement = useRef();
 
     useEffect(() => {
         fetchPlaylist();
     }, []);
+
+    useEffect(() => {
+        setCurrentSong(playList[currentSongIndex]);
+    }, [currentSongIndex])
 
     useEffect(() => {
         console.log(currentSong)
@@ -27,6 +31,22 @@ function MusicPlayerProvider({children}) {
             audioElement.current.pause();
         }
     },[isPlaying])
+
+    function nextSong() {
+        if(currentSongIndex < playList.length - 1) {
+            setCurrentSongIndex(currentSongIndex + 1);
+        }
+    }
+
+    function previousSong() {
+        console.log("double click")
+
+        if (currentSongIndex != 0) {
+            console.log(currentSongIndex)
+            setCurrentSongIndex(currentSongIndex - 1);
+        }
+
+    }
 
 
     async function fetchPlaylist() {
@@ -51,7 +71,9 @@ function MusicPlayerProvider({children}) {
         setCurrentSong,
         isPlaying,
         toggleIsPlaying,
-        audioElement
+        audioElement,
+        previousSong,
+        nextSong
     }
 
     return (
