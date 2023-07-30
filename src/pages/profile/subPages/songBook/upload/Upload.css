@@ -14,67 +14,77 @@
 #popup-upload-container {
     width: 700px;
     height: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: end;
-    background-color: white;
-    border: 1px solid black;
-    position: absolute;
+    display: grid;
+    grid-template-columns: 25px repeat(4, 1fr) 25px;
+    grid-template-rows: 25px 50px 250px 250px 25px;
+    grid-template-areas:
+            ". .  . . . close"
+            ". song song song song ."
+            ". info info cover cover ."
+            ". story story story story ."
+            ". . . . submit .";
+    gap: 16px;
+    margin-top: 0;
     z-index: 10;
 }
 
 #close-popup {
-    margin: 16px 16px 0 16px;
-}
-
-#popup-upload-container > form {
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
-    display: grid;
-    grid-template-columns: 16px 310px 148px 148px 16px;
-    grid-template-rows: 40%  10% 30% 10%;
-    grid-template-areas: ". info cover cover ."
-                         ". song song song ."
-                         ". story story story ."
-                         ". . . submit .";
-    gap: 16px;
-    margin: 16px 16px 0  16px;
+    grid-area: close;
+    /*margin: 16px 16px 0 16px;*/
 }
 
 #upload-song-info {
+    width: calc(100% - 16px);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: end;
+    align-items: center;
     grid-area: info;
+    margin: 0 0 0 0;
 }
 
 #upload-song-cover {
+    width: calc(100% - 16px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     grid-area: cover;
+    margin: 0 0 0 0;
 }
 
-#upload-song-cover > img {
+#upload-song-cover  img {
     width: 175px;
+    margin: 0 0 0 0;
 }
 
 #upload-song-story {
+    width: calc(100%);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
+    margin: 0;
     grid-area: story;
+    margin: 0 0 0 0;
 }
 
 #upload-song-file {
+    width: calc(100% - 16px);
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     grid-area: song;
+    margin: 0 0 0 0;
 }
+
+#preview-player {
+    width: 250px;
+    height: 30px;
+}
+
+
 
 #upload-song-submit {
     grid-area: submit;
@@ -82,4 +92,18 @@
 
 .update-img-btn {
     z-index: 20;
+}
+
+#upload-header {
+    font-size: xxx-large;
+}
+
+#upload-field {
+    background-color: white;
+}
+
+.item {
+    width: calc(100% - 16px);
+    display: flex;
+    flex-direction: column;
 }

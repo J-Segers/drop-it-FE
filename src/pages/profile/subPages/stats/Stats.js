@@ -49,13 +49,23 @@ function Stats() {
             />
             </div>
             <div className={"chart"}>
-                <Chart
-                chartType={"LineChart"}
-                data={data}
-                options={options}
+            <Chart
+                chartEvents={[
+                    {
+                    eventName: "select",
+                    callback: ({ chartWrapper }) => {
+                        const chart = chartWrapper.getChart();
+                        const selection = chart.getSelection();
+                        if (selection.length === 0) return;
+                        const region = data[selection[0].row + 1];
+                        console.log("Selected : " + region);
+                    },
+                    },
+                ]}
+                chartType="GeoChart"
                 width="400px"
                 height="200px"
-                legendToggle
+                data={data}
             />
             </div>
             <div className={"chart"}>
@@ -70,7 +80,7 @@ function Stats() {
             </div>
             <div className={"chart"}>
                 <Chart
-                chartType={"LineChart"}
+                chartType={"ColumnChart"}
                 data={data}
                 options={options}
                 width="400px"

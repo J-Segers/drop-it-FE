@@ -1,3 +1,7 @@
+html {
+  box-sizing: content-box;
+}
+
 :root {
   --header-height: 70px;
   --footer-height: 50px;
@@ -15,11 +19,10 @@
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: auto;
   font-family: Arial, serif;
   margin: 0;
-  /*overflow: hidden;*/
 }
 
 a {

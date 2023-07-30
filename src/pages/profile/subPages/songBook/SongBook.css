@@ -3,8 +3,8 @@
     height: calc(100vh - var(--header-height) - var(--small-player-height) - var(--footer-height) - 135px);
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     overflow-x: hidden;
 }
 
@@ -25,11 +25,12 @@
     height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     color: rgba(255, 255, 255, 0.5);
     background-color: var(--main-color);
     margin: 8px;
+    cursor: pointer;
 }
 
 #upload-filler {

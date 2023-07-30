@@ -1,11 +1,14 @@
 import React, {createContext, useEffect, useState} from 'react';
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import defaultImg from "../assets/profile-default.png";
 
 export const AuthenticationContext = createContext(null);
 
 function AuthenticationContextProvider({children}) {
+
+    const client = axios.create({
+        baseURL: "http://localhost:8080/"
+    });
 
     const [auth, setAuth] = useState({
         isAuth: false,
@@ -15,6 +18,7 @@ function AuthenticationContextProvider({children}) {
     });
 
     useEffect(() => {
+        console.log(auth);
     }, [auth]);
 
     useEffect(() => {
@@ -30,7 +34,7 @@ function AuthenticationContextProvider({children}) {
                 }
             });
         }
-
+        console.log("test");
     }, []);
 
     function localUpdateProfileImg(profile) {
@@ -48,13 +52,8 @@ function AuthenticationContextProvider({children}) {
     async function getProfileData(token) {
 
         const decodedToken = jwtDecode(token);
-        try {
-            const response = await axios.get(`http://localhost:8080/profile/${decodedToken.sub}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,}
-            })
 
+        client.get(`profile/${decodedToken.sub}`).then((response) => {
             setAuth({
                 isAuth: true,
                 user: {
@@ -64,16 +63,13 @@ function AuthenticationContextProvider({children}) {
                     profile: {...response.data},
                 }
             });
-
-        } catch (e) {
-
-        }
+        })
     }
 
-    async function login(token) {
+    async function login(data) {
         console.log(`De gebruiker is ingelogd!`);
-
-        getProfileData(token);
+        console.log(data);
+        getProfileData(data);
     }
 
     function logout() {

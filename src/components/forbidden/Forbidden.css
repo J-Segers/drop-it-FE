@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+#forbidden-container {
+    width: 800px;
+    height: 400px;
+    display: flex;
+    font-family: "Varela Round", sans-serif;
+    font-size: 60px;
+}
+
+#forbidden-img {
+    margin: 35px 0;
+    width: 200px;
+    border-radius: 50%;
+}

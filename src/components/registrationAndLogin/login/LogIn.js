@@ -17,10 +17,12 @@ function LogIn() {
     const history = useNavigate();
     const location = useLocation();
 
+    const client = axios.create({baseURL: "http://localhost:8080/"});
+
     async function onLoginRequest(data) {
         console.log(data)
         try {
-            const response = await axios.post("http://localhost:8080/auth", data)
+            const response = await client.post("auth", data)
                 .catch(e => e);
 
             localStorage.setItem("token", response.data);
@@ -32,10 +34,14 @@ function LogIn() {
             if(errorMessage !== "") {
                 setErrorMessage("");
             }
+
             toggleLogInPopUp(false);
+            
         } catch (e) {
             if(e.response.status === 403){
                 setErrorMessage("Wrong username or password!");
+            } else {
+                setErrorMessage('sumting wong');
             }
         }
 

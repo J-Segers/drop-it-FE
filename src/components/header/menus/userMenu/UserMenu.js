@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./UserMenu.css";
 import defaultProfile from "../../../../assets/Portrait_Placeholder.png";
 import {NavLink} from "react-router-dom";
@@ -6,40 +6,42 @@ import {PopUpContext} from "../../../../context/PopupProvider";
 import {AuthenticationContext} from "../../../../context/AuthenticationContextProvider";
 
 function UserMenu() {
+
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const {auth, profile, logout} = useContext(AuthenticationContext);
     const {toggleLogInPopUp, handlePopUpLanding} = useContext(PopUpContext);
 
-    const [menuState, setMenuState] = useState(false);
-    const {auth, profile, logout} = useContext(AuthenticationContext);
-    const btnRef = useRef();
+    function logInOut() {
+        if(!auth.isAuth){
+            handlePopUpLanding(true);
+            toggleLogInPopUp(true);
+        } else {
+            logout();
+        }
+    }
 
     useEffect(() => {
-        const closeDropdown = e => {
-            if(e.path[1] !== btnRef.current){
-                setMenuState(false);
-            }
-        };
-        document.body.addEventListener('click', closeDropdown);
+        console.log(profile);
+    }, [profile]);
 
-        return () => document.body.removeEventListener('click', closeDropdown);
-    }, [])
-
-
+    
     return (
-        <div ref={btnRef} id={"user-menu-container"} onClick={() => {setMenuState(menuState => !menuState)}}>
-            <img src={auth.isAuth && profile && profile.profileImg ? `${profile.profileImg.url}` : defaultProfile} alt={""}/>
-            <div  className={menuState ? "user-menu-open" : "user-menu-closed"} />
-            <div id={`menu-${menuState ? "open" : "closed"}-container`}>
-                {auth.isAuth &&
-                    <NavLink to={`profile/${auth.user.username}/info`}><div className={"btn"}>profile</div></NavLink>
+        <div id={"user-menu-container"} onClick={() => {setMenuOpen(!menuOpen)}}>
+            <img src={auth.isAuth && profile?.profileImg ? `${profile?.profileImg?.url}` : defaultProfile} alt={""}/>
+            <div  className={menuOpen ? "user-menu-open" : "user-menu-closed"} />
+            <div id={`menu-${menuOpen ? "open" : "closed"}-container`}>
+                {auth.isAuth && <>
+                        <NavLink to={`profile/${auth.user.username}/info`}>
+                            <div className={"btn"}>profile</div>
+                        </NavLink>
+                        <NavLink to={`profile/${auth.user.username}/settings`}>
+                            <div className={"btn"}>settings</div>
+                        </NavLink>
+                    </>
                 }
-                <div className={"btn"} onClick={() => {
-                    if(!auth.isAuth){
-                        handlePopUpLanding(true);
-                        toggleLogInPopUp(true);
-                    } else {
-                        logout();
-                    }
-                }}>
+
+                <div className={"btn"} onClick={() => logInOut() }>
                     {auth.isAuth ? <div className={"btn"}>logout</div> : <div className={"btn"}>login</div>}
                 </div>
             </div>

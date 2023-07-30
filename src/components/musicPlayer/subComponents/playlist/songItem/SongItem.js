@@ -1,11 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import "./SongItem.css";
 
 function SongItem({song}) {
-
-    useEffect(() => {
-        console.log(song);
-    })
 
     return (
         <div className={"song-item"}>
@@ -17,4 +13,4 @@ function SongItem({song}) {
     );
 }
 
-export default SongItem;
+export default SongItem; 

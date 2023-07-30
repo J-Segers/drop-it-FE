@@ -1,0 +1,29 @@
+#settings-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+fieldset {
+    width: 200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.settings-item {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.settings-item > input[type=password], .settings-item > input[type=email] {
+    width: calc(100% - 8px);
+}
+
+.edit-email-btn {
+    display: flex;
+    justify-content: space-evenly;
+}

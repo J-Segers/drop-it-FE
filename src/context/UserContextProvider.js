@@ -24,7 +24,6 @@ function UserContextProvider({children}) {
         userProfile,
         fillUser,
         fillUserProfile
-
     }
 
     return (

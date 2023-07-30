@@ -1,9 +1,9 @@
 .schedule-container {
-    width: 389px;
+    width: 400px;
     height: calc(100vh - var(--header-height) - var(--large-player-height) - var(--footer-height));
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     overflow-x: hidden;
 }

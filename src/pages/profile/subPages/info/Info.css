@@ -19,8 +19,8 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     grid-area: info;
     border: 1px solid black;
     padding: 0 16px;
@@ -31,8 +31,8 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin: 8px;
 }
 
@@ -87,8 +87,8 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin: 8px;
 }
 

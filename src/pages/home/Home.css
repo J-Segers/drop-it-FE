@@ -1,21 +1,11 @@
 #home-container {
-    width: 1200px;
+    width: 100%;
     height: 100%;
-    display: grid;
-    text-align: justify;
-    grid-template-rows: 100px calc(100% - 100px);
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas:
-            "about register schedule"
-            "about pitch schedule";
-    gap: 16px;
-}
-
-#about-dropit {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    grid-area: about;
+    text-align: justify;
 }
 
 #register-btn {
@@ -30,7 +20,7 @@
     border-radius: 50px;
     border: none;
     grid-area: register;
-    margin: auto;
+    margin: 50px auto;
 }
 
 #register-btn:hover {
@@ -41,10 +31,19 @@
     border: 2px solid var(--main-border-color);
 }
 
-#pitch {
-    grid-area: pitch;
+#about-dropit, #pitch, .schedule {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px 0;
+    border: 1px solid black;
+    margin: 50px 0;
 }
 
-.schedule {
-    grid-area: schedule;
+#about-dropit img, #about-dropit p,
+#pitch img, #pitch p,
+.schedule img, .schedule p {
+    width: 600px;
 }

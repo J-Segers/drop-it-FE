@@ -6,17 +6,23 @@ import defaultProfileBodyImg from "../../../../assets/placeholder-image.png";
 import axios from "axios";
 import {AuthenticationContext} from "../../../../context/AuthenticationContextProvider";
 import {useParams, useOutletContext} from "react-router-dom";
+import jwtDecode from 'jwt-decode';
 
 function Info() {
-    const {register, handleSubmit} = useForm();
-    const {register: bodyImgRegister, handleSubmit: handleBodyImgSubmit} = useForm();
-    const {register: profileImgRegister, handleSubmit: handleProfileImgSubmit} = useForm();
-    const {auth, user, profile, changeProfileImg} = useContext(AuthenticationContext);
 
-    const [profileInfo, setProfileInfo] = useOutletContext();
     const [edit, toggleEdit] = useState(false);
     const [previewBodyImage, setPreviewBodyImage] = useState(defaultProfileBodyImg);
     const [previewImage, setPreviewImage] = useState(defaultProfileImg);
+
+    const {register, handleSubmit} = useForm();
+    const {register: bodyImgRegister, handleSubmit: handleBodyImgSubmit} = useForm();
+    const {register: profileImgRegister, handleSubmit: handleProfileImgSubmit} = useForm();
+    const {user, profile, changeProfileImg} = useContext(AuthenticationContext);
+    const [profileInfo, setProfileInfo] = useOutletContext();
+
+    const client = axios.create({
+        baseURL: 'http://localhost:8080/'
+    });
 
     const {username} = useParams();
 
@@ -32,63 +38,35 @@ function Info() {
 
     async function onProfileFormSubmit(data) {
 
-        console.log(data);
+        const decodedToken = jwtDecode(localStorage.getItem("token"));
 
-        try {
-            const response = await axios.put(`http://localhost:8080/profile/update/${user.username}`,
-                data,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    }
-                })
+        client.put(`profile/update/${decodedToken.sub}`, data).then((response) => {
             setProfileInfo(response.data);
-        } catch (e) {
-            console.error(e);
-        }
-
+        })
     }
 
     async function onProfileImgSubmit(data) {
-        console.log(data)
+
         const formData = new FormData();
         formData.append("file", data.profileImg[0]);
-        console.log("formdata: ", Object.fromEntries(formData));
 
-        try {
-            const response = await axios.post(`http://localhost:8080/upload/profileImg/${user.username}`,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    },
-                })
+
+        await client.post(`upload/profileImg/${user.username}`, formData).then((response) => {
             setProfileInfo(
                 {...profileInfo,
                     profileImg: {...response.data}
                 });
-        } catch (e) {
+        });
 
-        }
     }
 
     async function onBodyImgSubmit(data) {
 
         const formData = new FormData();
         formData.append("file", data.profileBodyImg[0]);
-        console.log("formdata: ", Object.fromEntries(formData));
 
         try {
-            const response = await axios.post(`http://localhost:8080/upload/profileBodyImg/${user.username}`,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    },
-                })
+            const response = await client.post(`upload/profileBodyImg/${user.username}`, formData);
             setProfileInfo(
                 {...profileInfo,
                         profileBodyImg: {...response.data}

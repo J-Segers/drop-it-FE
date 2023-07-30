@@ -1,12 +1,9 @@
-function convertMsToMinAndSec(ms) {
+function getTimeStampFromDuration(length) {
 
-    const totalSeconds = ms / 1000;
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
+    const minutes = Math.floor(length / 60);
+    const seconds = Math.floor(length % 60);
 
-    const returningSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-
-    return `${minutes}:${returningSeconds}`
+    return [minutes, seconds]
 }
 
-export default convertMsToMinAndSec;
+export default getTimeStampFromDuration;

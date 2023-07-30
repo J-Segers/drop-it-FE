@@ -16,6 +16,7 @@ function MusicPlayerProvider({children}) {
         fetchPlaylist();
     }, []);
 
+
     useEffect(() => {
         setCurrentSong(playList[currentSongIndex]);
     }, [currentSongIndex])
@@ -41,8 +42,7 @@ function MusicPlayerProvider({children}) {
     function previousSong() {
         console.log("double click")
 
-        if (currentSongIndex != 0) {
-            console.log(currentSongIndex)
+        if (currentSongIndex !== 0) {
             setCurrentSongIndex(currentSongIndex - 1);
         }
 
@@ -52,8 +52,6 @@ function MusicPlayerProvider({children}) {
     async function fetchPlaylist() {
         try {
             const response = await axios.get("http://localhost:8080/allsongs");
-            console.log("response", response.data)
-            console.log("response", response.data[0])
 
             setPlaylist(response.data);
             setCurrentSong(response.data[0]);
